@@ -212,7 +212,7 @@ local myDefaultOptions = {
 		["Account"] = "",
 		["OpenHistoryAddClient"] = true,
 		["OpenHistoryOnMailbox"] = true,
-		["Version"] = 4
+		["Version"] = 1
 	},
 	["Mailing"] = {
 		["InputSubjectPrefix"] = "NBC",
@@ -225,7 +225,8 @@ local myDefaultOptions = {
 		["InputBoostTyp4"] = "Legacy",
 		["InputBoostTyp5"] = "PVP",
 		["InputBoostTyp6"] = "Mounts",
-		["InputBoostTyp7"] = "Torghast"
+		["InputBoostTyp7"] = "Torghast",
+		["InputBoostTyp8"] = "Collect"
 	},
 	["AdvertiserCuts"] = {
 		["Mounts"] = {
@@ -1425,131 +1426,133 @@ end
 local function BuildAdvertiserCutsOptionArgs(arg_table, options)
 	--arg_table = {}
 	--print(arg_table)
-	for i, k in pairs(options) do
-		--print(k)
-		if k ~= "" then
-			local section = k
-			arg_table[section] = {
-				type = "group",
-				name = "Boost Type: "..section,
-				inline = true,
-				args = {
-					Normal = {
-						type = "group",
-						name = "Normal",
-						order = 1,
-						inline = true,
-						args = {
-							Horde = {
-								type = "input",
-								name = "Horde",
-								order = 1,
-								get = 'GetOption',
-								set = 'SetOption',
+	if options ~= nil then
+		for i, k in pairs(options) do
+			--print(k)
+			if k ~= "" then
+				local section = k
+				arg_table[section] = {
+					type = "group",
+					name = "Boost Type: "..section,
+					inline = true,
+					args = {
+						Normal = {
+							type = "group",
+							name = "Normal",
+							order = 1,
+							inline = true,
+							args = {
+								Horde = {
+									type = "input",
+									name = "Horde",
+									order = 1,
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+								HordeType = {
+									type = "select",
+									name = "",
+									order = 2,
+									values = { [1] = "%", [2] = "g" },
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+								Alliance = {
+									type = "input",
+									name = "Alliance",
+									order = 3,
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+								AllianceType = {
+									type = "select",
+									name = "",
+									order = 4,
+									values = { [1] = "%", [2] = "g" },
+									get = 'GetOption',
+									set = 'SetOption',
+								},
 							},
-							HordeType = {
-								type = "select",
-								name = "",
-								order = 2,
-								values = { [1] = "%", [2] = "g" },
-								get = 'GetOption',
-								set = 'SetOption',
+						},
+						Client = {
+							type = "group",
+							name = "Client",
+							order = 2,
+							inline = true,
+							args = {
+								Horde = {
+									type = "input",
+									name = "Horde",
+									order = 1,
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+								HordeType = {
+									type = "select",
+									name = "",
+									order = 2,
+									values = { [1] = "%", [2] = "g" },
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+								Alliance = {
+									type = "input",
+									name = "Alliance",
+									order = 3,
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+								AllianceType = {
+									type = "select",
+									name = "",
+									order = 4,
+									values = { [1] = "%", [2] = "g" },
+									get = 'GetOption',
+									set = 'SetOption',
+								},
 							},
-							Alliance = {
-								type = "input",
-								name = "Alliance",
-								order = 3,
-								get = 'GetOption',
-								set = 'SetOption',
-							},
-							AllianceType = {
-								type = "select",
-								name = "",
-								order = 4,
-								values = { [1] = "%", [2] = "g" },
-								get = 'GetOption',
-								set = 'SetOption',
+						},
+						Inhouse = {
+							type = "group",
+							name = "Inhouse",
+							order = 3,
+							inline = true,
+							args = {
+								Horde = {
+									type = "input",
+									name = "Horde",
+									order = 1,
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+								HordeType = {
+									type = "select",
+									name = "",
+									order = 2,
+									values = { [1] = "%", [2] = "g" },
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+								Alliance = {
+									type = "input",
+									name = "Alliance",
+									order = 3,
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+								AllianceType = {
+									type = "select",
+									name = "",
+									order = 4,
+									values = { [1] = "%", [2] = "g" },
+									get = 'GetOption',
+									set = 'SetOption',
+								},
 							},
 						},
 					},
-					Client = {
-						type = "group",
-						name = "Client",
-						order = 2,
-						inline = true,
-						args = {
-							Horde = {
-								type = "input",
-								name = "Horde",
-								order = 1,
-								get = 'GetOption',
-								set = 'SetOption',
-							},
-							HordeType = {
-								type = "select",
-								name = "",
-								order = 2,
-								values = { [1] = "%", [2] = "g" },
-								get = 'GetOption',
-								set = 'SetOption',
-							},
-							Alliance = {
-								type = "input",
-								name = "Alliance",
-								order = 3,
-								get = 'GetOption',
-								set = 'SetOption',
-							},
-							AllianceType = {
-								type = "select",
-								name = "",
-								order = 4,
-								values = { [1] = "%", [2] = "g" },
-								get = 'GetOption',
-								set = 'SetOption',
-							},
-						},
-					},
-					Inhouse = {
-						type = "group",
-						name = "Inhouse",
-						order = 3,
-						inline = true,
-						args = {
-							Horde = {
-								type = "input",
-								name = "Horde",
-								order = 1,
-								get = 'GetOption',
-								set = 'SetOption',
-							},
-							HordeType = {
-								type = "select",
-								name = "",
-								order = 2,
-								values = { [1] = "%", [2] = "g" },
-								get = 'GetOption',
-								set = 'SetOption',
-							},
-							Alliance = {
-								type = "input",
-								name = "Alliance",
-								order = 3,
-								get = 'GetOption',
-								set = 'SetOption',
-							},
-							AllianceType = {
-								type = "select",
-								name = "",
-								order = 4,
-								values = { [1] = "%", [2] = "g" },
-								get = 'GetOption',
-								set = 'SetOption',
-							},
-						},
-					},
-				},
-			}
+				}
+			end
 		end
 	end
 end
@@ -2177,28 +2180,8 @@ local function ShowHistory()
 	SendDataButton:SetText("Share data with raid/party")
 
 	SendDataButton:SetScript("OnClick", function(self)
-		
-		if IsInGroup() or IsInRaid() then
-			--print("in a group")
-			self:Disable()
-			
-			print("Sending Data...")
-			nova:SendCommMessage("NovaBooking", "START", "RAID", "CHANNEL")
-			
-			for i = #NovaBookingHistory, 1, -1 do
-				--print("Send data... "..i)
-				SyncSendData(i)
-			end
-			
-			nova:SendCommMessage("NovaBooking", "END", "RAID", "CHANNEL")
-			print("Sending Data... DONE!")
-			
-			self:Enable()
-		else
-			print("You have to be in a raid/party")
-		end
-		
-		
+		StaticPopup_Show("NOVABOOKING_SYNC_SEND")
+
 	end)
 	
 	
@@ -2930,7 +2913,7 @@ end
 function SyncSendData(i)
 	--print("Sending Message "..i)
 	local boolToString
-	
+	local discord = ""
 	if NovaBookingHistory[i].IsSent == true then 
 		--print(i.." "..NovaBookingHistory[i].IsSent) 
 		boolToString = "true" 
@@ -2938,7 +2921,10 @@ function SyncSendData(i)
 		--print(i.." "..NovaBookingHistory[i].IsSent)
 		boolToString = "false" 
 	end
-	nova:SendCommMessage("NovaBooking", string.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s", NovaBookingHistory[i].ID, NovaBookingHistory[i].Timestamp, NovaBookingHistory[i].Client, NovaBookingHistory[i].ClientType, NovaBookingHistory[i].BoostType, tostring(NovaBookingHistory[i].Gold/1000), boolToString, NovaBookingHistory[i].Notes, NovaBookingHistory[i].Accountname, NovaBookingHistory[i].LastChanged, NovaBookingHistory[i].Faction, NovaBookingHistory[i].AdvertiserCut, tostring(NovaBookingHistory[i].AdvertiserCutGold/1000), NovaBookingHistory[i].AdvertiserCutType,string.sub(NovaBookingHistory[i].DiscordLink,30)), "RAID", "CHANNEL")
+	if NovaBookingHistory[i].DiscordLink ~= nil and string.len(NovaBookingHistory[i].DiscordLink) > 30 then
+		discord = string.sub(NovaBookingHistory[i].DiscordLink,30)
+	end
+	nova:SendCommMessage("NovaBooking", string.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s", NovaBookingHistory[i].ID, NovaBookingHistory[i].Timestamp, NovaBookingHistory[i].Client, NovaBookingHistory[i].ClientType, NovaBookingHistory[i].BoostType, tostring(NovaBookingHistory[i].Gold/1000), boolToString, NovaBookingHistory[i].Notes, NovaBookingHistory[i].Accountname, NovaBookingHistory[i].LastChanged, NovaBookingHistory[i].Faction, NovaBookingHistory[i].AdvertiserCut, tostring(NovaBookingHistory[i].AdvertiserCutGold/1000), NovaBookingHistory[i].AdvertiserCutType,discord), "RAID", "CHANNEL")
 	--print("Sending Message "..i.." DONE")
 end
 
@@ -3119,8 +3105,6 @@ function nova:OnInitialize()
 		--print "---NovaBoosting End";
 	end
 	
-	BuildAdvertiserCutsOptionArgs(myOptionsTable.args.AdvertiserCuts.args, novaOptions.Boosts)
-	
 	LibStub("AceConfig-3.0"):RegisterOptionsTable(title, myOptionsTable)
   	LibStub("AceConfigDialog-3.0"):AddToBlizOptions(title, title)
 	
@@ -3176,14 +3160,14 @@ function nova:ADDON_LOADED(event, ...)
 			
 			novaOptions.General.Version = 3
 		end
-		]]
+		
 		if novaOptions.General.Version == 4 then
 			for i,v in pairs(NovaBookingHistory) do
 				if v.DiscordLink == nil then v.DiscordLink = "" end
 			end
 		end
 		
-		novaOptions.General.Version = 5
+		novaOptions.General.Version = 5]]
 		------------------
 		--- Set Options
 		------------------
@@ -3227,7 +3211,13 @@ function nova:ADDON_LOADED(event, ...)
 			novaOptions.Banking = myDefaultOptions.Banking
 		end
 		
+		BuildAdvertiserCutsOptionArgs(myOptionsTable.args.AdvertiserCuts.args, novaOptions.Boosts)
 		BuildBankingOptionsArgs(myOptionsTable.args.Banking.args, novaOptions.Banking)
+		
+		
+		if novaOptions.AdvertiserCuts == nil then 
+			novaOptions.AdvertiserCuts = myDefaultOptions.AdvertiserCuts 
+		end
 		
 		sortBookings()
 		
@@ -3318,6 +3308,54 @@ function nova:ADDON_LOADED(event, ...)
 			print("Added "..SyncedRowsAdded.." new row(s)")
 			print("Modified "..SyncedRowsChanged.." row(s)")
 		end,
+        timeout = 0,
+        whileDead = 1,
+        hideOnEscape = 1,
+		preferredIndex = 3,
+      }
+	  StaticPopupDialogs["NOVABOOKING_SYNC_SEND"] = {
+		text = "Blizzard is only allowing to share ~20 messages. Please fill out the id of the runs you want to share: ",
+		button1 = "Send data",
+		button2 = CANCEL,
+		OnShow = function(this, ...)
+          this:SetWidth(420)
+
+          local editBox = _G[this:GetName() .. "EditBox"]
+
+          editBox:SetText("1-10")
+          editBox:SetFocus()
+          editBox:HighlightText(false)
+        end,
+		OnAccept = function(this, ...)
+			if IsInGroup() or IsInRaid() then
+				--print("in a group")
+				
+				local editBox = _G[this:GetName() .. "EditBox"]
+				if editBox:GetText() ~= nil and editBox:GetText() ~= "" and string.len(editBox:GetText()) >= 3 and string.find(editBox:GetText(), '%-') then
+					local textSplit = mysplit(editBox:GetText(), "-")
+					
+					if tonumber(textSplit[2]) >= tonumber(textSplit[1]) and textSplit[2] ~= "" and textSplit[2] ~= nil and textSplit[1] ~= "" and textSplit[1] ~= nil and tonumber(textSplit[2]) < #NovaBookingHistory and tonumber(textSplit[1]) < #NovaBookingHistory then
+						print("Sending Data...")
+						nova:SendCommMessage("NovaBooking", "START", "RAID", "CHANNEL")
+					
+						for i = textSplit[2], textSplit[1], -1 do
+							--print("Send data... "..i)
+							SyncSendData(i)
+						end
+						
+						nova:SendCommMessage("NovaBooking", "END", "RAID", "CHANNEL")
+						print("Sending Data... DONE!")
+					else
+						print("Error: please give a range of ids from your history e.g. 1-10 or 5-20")
+					end
+				else
+					print("Error: please give a range of ids from your history e.g. 1-10 or 5-20")
+				end
+			else
+				print("You have to be in a raid/party")
+			end
+		end,
+		hasEditBox = 2,
         timeout = 0,
         whileDead = 1,
         hideOnEscape = 1,
