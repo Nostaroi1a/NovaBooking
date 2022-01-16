@@ -1,0 +1,10 @@
+## Interface: 90105
+## Title: NovaBooking
+## Notes: NovaBooking
+## Author: Nostàroi-Antonidas
+## Version: 1.0
+## SavedVariables: NovaBookingHistory, novaOptions
+
+
+embeds.xml
+core.lua
