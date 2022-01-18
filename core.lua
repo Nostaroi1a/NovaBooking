@@ -2015,43 +2015,47 @@ local function ShowHistory()
 							if isMailOpen == false then
 								print("Go to the mailbox dumbass!")
 							else
-
-								local depotName = getDepotName()
-								local realmName,_ = string.gsub(GetRealmName(), "%s+", "")
-								local connectedRealms = GetAutoCompleteRealms()
-								
-								if depotName == nil or depotName == "" then
-									StaticPopup_Show("NOVABOOKING_WARNING_NODEPOTFOUND", currentRealm)
-								end
-								
-							
-								local _,clientRealm = NovaBookingHistory[index].Client:match("([^\-]+)\-([^\-]+)")
-								local boolRealmMail = false
-								if clientRealm:lower() == realmName:lower() then
-									boolRealmMail = true
+								if GetMoney() < NovaBookingHistory[index].Gold + 30 then
+									StaticPopup_Show("NOVABOOKING_WARNING_NOTENOUGHGOLD")
 								else
-									for i=1, #connectedRealms do
-										if clientRealm:lower() == connectedRealms[i]:lower() then
-											boolRealmMail = true
-											break
+								
+									local depotName = getDepotName()
+									local realmName,_ = string.gsub(GetRealmName(), "%s+", "")
+									local connectedRealms = GetAutoCompleteRealms()
+									
+									if depotName == nil or depotName == "" then
+										StaticPopup_Show("NOVABOOKING_WARNING_NODEPOTFOUND", currentRealm)
+									end
+									
+								
+									local _,clientRealm = NovaBookingHistory[index].Client:match("([^\-]+)\-([^\-]+)")
+									local boolRealmMail = false
+									if clientRealm:lower() == realmName:lower() then
+										boolRealmMail = true
+									else
+										for i=1, #connectedRealms do
+											if clientRealm:lower() == connectedRealms[i]:lower() then
+												boolRealmMail = true
+												break
+											end
+											i = i + 1
 										end
-										i = i + 1
 									end
-								end
-								if boolRealmMail == false then
-									local dialogWarning = StaticPopup_Show("NOVABOOKING_WARNING_WRONGSERVER", realmName, clientRealm)
-									if (dialogWarning) then
-										dialogWarning.data  = realmName
-										dialogWarning.data2 = clientRealm
-										dialogWarning.data3 = index
-										dialogWarning.data4 = SendMailNameEditBox
-										dialogWarning.data5 = SendMailSubjectEditBox
-										dialogWarning.data6 = SendMailBodyEditBox
-										dialogWarning.data7 = SendMailMoneyGold
-										dialogWarning.data8 = depotName
+									if boolRealmMail == false then
+										local dialogWarning = StaticPopup_Show("NOVABOOKING_WARNING_WRONGSERVER", realmName, clientRealm)
+										if (dialogWarning) then
+											dialogWarning.data  = realmName
+											dialogWarning.data2 = clientRealm
+											dialogWarning.data3 = index
+											dialogWarning.data4 = SendMailNameEditBox
+											dialogWarning.data5 = SendMailSubjectEditBox
+											dialogWarning.data6 = SendMailBodyEditBox
+											dialogWarning.data7 = SendMailMoneyGold
+											dialogWarning.data8 = depotName
+										end
+									else
+										setMailContent(index, SendMailNameEditBox, SendMailSubjectEditBox, SendMailBodyEditBox, SendMailMoneyGold, depotName)
 									end
-								else
-									setMailContent(index, SendMailNameEditBox, SendMailSubjectEditBox, SendMailBodyEditBox, SendMailMoneyGold, depotName)
 								end
 							end
 						end)
@@ -3255,6 +3259,14 @@ function nova:ADDON_LOADED(event, ...)
 			hideOnEscape = true,
 			preferredIndex = 3,
 		}
+		StaticPopupDialogs["NOVABOOKING_WARNING_NOTENOUGHGOLD"] = {
+			text = "You do not have enough gold on your character!",
+			button1 = ACCEPT,
+			timeout = 0,
+			whileDead = true,
+			hideOnEscape = true,
+			preferredIndex = 3,
+		}
 		StaticPopupDialogs["NOVABOOKING_SPLITENTRY"] = {
 			text = "How often should entry #%s be splited into?",
 			button1 = "Split",
@@ -3329,12 +3341,12 @@ function nova:ADDON_LOADED(event, ...)
 		OnAccept = function(this, ...)
 			if IsInGroup() or IsInRaid() then
 				--print("in a group")
-				
+
 				local editBox = _G[this:GetName() .. "EditBox"]
 				if editBox:GetText() ~= nil and editBox:GetText() ~= "" and string.len(editBox:GetText()) >= 3 and string.find(editBox:GetText(), '%-') then
 					local textSplit = mysplit(editBox:GetText(), "-")
-					
-					if tonumber(textSplit[2]) >= tonumber(textSplit[1]) and textSplit[2] ~= "" and textSplit[2] ~= nil and textSplit[1] ~= "" and textSplit[1] ~= nil and tonumber(textSplit[2]) < #NovaBookingHistory and tonumber(textSplit[1]) < #NovaBookingHistory then
+
+					if tonumber(textSplit[2]) >= tonumber(textSplit[1]) and textSplit[2] ~= "" and textSplit[2] ~= nil and textSplit[1] ~= "" and textSplit[1] ~= nil and tonumber(textSplit[2]) <= #NovaBookingHistory and tonumber(textSplit[1]) <= #NovaBookingHistory then
 						print("Sending Data...")
 						nova:SendCommMessage("NovaBooking", "START", "RAID", "CHANNEL")
 					
@@ -3349,7 +3361,7 @@ function nova:ADDON_LOADED(event, ...)
 						print("Error: please give a range of ids from your history e.g. 1-10 or 5-20")
 					end
 				else
-					print("Error: please give a range of ids from your history e.g. 1-10 or 5-20")
+					print("Error: please give a range of ids from your history e.g. 1-10 or 6-20")
 				end
 			else
 				print("You have to be in a raid/party")
