@@ -28,6 +28,8 @@ local goldCutAllianceLabel
 local goldCutHordeLabel
 local goldCutTotalLabel
 local goldCollectedLabel
+local acDropdownTypeForCollector
+local acEditboxTrialAdvertiser
 local SYNC_DATA = {}
 
 -----------------------------------------------------------------------------------------------------
@@ -1692,6 +1694,7 @@ local function setHistoryData()
 					{value = NovaBookingHistory[i].Notes},
 				}})
 			end
+			
 		end
 		
 		if boosthistoryST ~= nil then
@@ -1722,12 +1725,14 @@ local function DeleteItem(row)
 		print("Erorr in the matrix")
 	else
 		table.remove(NovaBookingHistory, idx) -- remove Table[2] and shift remaining entries
-		
+
 		for i, v in ipairs (NovaBookingHistory) do 
 			v.Index = i
 		end
+
 		--print("Deleted! "..row)
 	end
+	sortBookings()
 	setHistoryData()
 end
 
@@ -1752,6 +1757,8 @@ local function setMailContent(index, SendMailNameEditBox, SendMailSubjectEditBox
 	end
 	if novaOptions.Mailing.InputSubjectPrefix == "" then
 		SendMailSubjectEditBox:SetText(NovaBookingHistory[index].BoostType)
+	elseif NovaBookingHistory[index].BoostType == "Collect" and NovaBookingHistory[index].CollectBoostType ~= nil then
+		SendMailSubjectEditBox:SetText(novaOptions.Mailing.InputSubjectPrefix.." "..NovaBookingHistory[index].CollectBoostType.." "..NovaBookingHistory[index].BoostType)
 	else
 		SendMailSubjectEditBox:SetText(novaOptions.Mailing.InputSubjectPrefix.." "..NovaBookingHistory[index].BoostType)
 	end
@@ -1761,11 +1768,30 @@ local function setMailContent(index, SendMailNameEditBox, SendMailSubjectEditBox
 		novaOptions.Mailing.InputAdvertiser = ""
 	else
 		local boosterGold = NovaBookingHistory[index].Gold/10000
-		if NovaBookingHistory[index].ClientType == "Inhouse" then
-			local boosterGoldInhouseFull = floor(boosterGold * 100 / 90, 0)
-			SendMailBodyEditBox:SetText(novaOptions.Mailing.InputAdvertiser.."\n"..boosterGoldInhouseFull.."\n\nInhouse Pot\n"..boosterGold)
+		
+		local mailBodyTextInhouse
+		local mailBodyText
+		local boosterGoldInhouseFull = floor(boosterGold * 100 / 90, 0)
+		if NovaBookingHistory[index].DiscordLink ~= nil and NovaBookingHistory[index].DiscordLink ~= "" and NovaBookingHistory[index].DiscordLink ~= " " then
+			local runID = mysplit(NovaBookingHistory[index].DiscordLink,"/")
+			mailBodyTextInhouse = novaOptions.Mailing.InputAdvertiser.."\n"..boosterGoldInhouseFull.."\n\nInhouse Pot\n"..boosterGold.."\n\nRun ID\n"..runID[#runID]
+			if NovaBookingHistory[index].BoostType == "Collect" then
+				mailBodyText = NovaBookingHistory[index].CollectTrialAdvertiser.."\n"..boosterGold.."\n\nCollector\n"..novaOptions.Mailing.InputAdvertiser.."\n\n\nRun ID\n"..runID[#runID]
+			else
+				mailBodyText = novaOptions.Mailing.InputAdvertiser.."\n"..boosterGold.."\n\n\nRun ID\n"..runID[#runID]
+			end
 		else
-			SendMailBodyEditBox:SetText(novaOptions.Mailing.InputAdvertiser.."\n"..boosterGold)
+			mailBodyTextInhouse = novaOptions.Mailing.InputAdvertiser.."\n"..boosterGoldInhouseFull.."\n\nInhouse Pot\n"..boosterGold
+			if NovaBookingHistory[index].BoostType == "Collect" then
+				mailBodyText = NovaBookingHistory[index].CollectTrialAdvertiser.."\n"..boosterGold.."\n\nCollector\n"..novaOptions.Mailing.InputAdvertiser
+			else
+				mailBodyText = novaOptions.Mailing.InputAdvertiser.."\n"..boosterGold
+			end
+		end
+		if NovaBookingHistory[index].ClientType == "Inhouse" then
+			SendMailBodyEditBox:SetText(mailBodyTextInhouse)
+		else
+			SendMailBodyEditBox:SetText(mailBodyText)
 		end
 	end
 	
@@ -1915,6 +1941,21 @@ local function ShowHistory()
 					
 					cellFrame.text:SetText(cellData.value)
 					
+					
+						cellFrame:HookScript("OnEnter", function()
+							GameTooltip:SetOwner(cellFrame, "ANCHOR_TOP")
+							if #NovaBookingHistory >= index then
+								if NovaBookingHistory[index].CollectTrialAdvertiser ~= nil and NovaBookingHistory[index].CollectTrialAdvertiser ~= "" then
+									GameTooltip:SetText(NovaBookingHistory[index].CollectTrialAdvertiser)
+									GameTooltip:Show()
+								end
+							end
+						end)
+						cellFrame:HookScript("OnLeave", function()
+							GameTooltip:Hide()
+						end)
+					
+					
 					if NovaBookingHistory[index].Faction == "Alliance" then
 						if NovaBookingHistory[index].IsSent == true then
 							cellFrame.text:SetTextColor(0,0.4,0.8)
@@ -1953,8 +1994,20 @@ local function ShowHistory()
 					local index = data[realrow].cols[1].value
 					local cellData = data[realrow].cols[column]
 					
-					
 					cellFrame.text:SetText(cellData.value)
+					
+					cellFrame:HookScript("OnEnter", function()
+						GameTooltip:SetOwner(cellFrame, "ANCHOR_TOP")
+						if #NovaBookingHistory >= index then
+							if NovaBookingHistory[index].CollectBoostType ~= nil and NovaBookingHistory[index].CollectBoostType ~= "" then
+								GameTooltip:SetText(NovaBookingHistory[index].CollectBoostType)
+								GameTooltip:Show()
+							end
+						end
+					end)
+					cellFrame:HookScript("OnLeave", function()
+						GameTooltip:Hide()
+					end)
 					
 					if NovaBookingHistory[index].IsSent == true then
 						cellFrame.text:SetTextColor(0.5,0.5,0.5)
@@ -2003,14 +2056,36 @@ local function ShowHistory()
 				if fShow then 
 					local index = data[realrow].cols[1].value
 					--print(data[realrow].cols[1].value)
+
 					local cellData = data[realrow].cols[column]
-					if cellData.value then
+					if cellData.value == true then
 						cellFrame.text:SetText('DONE')
 						cellFrame.text:SetTextColor(0.5,0.5,0.5)
+						
 					else
+						
+						--local mailButton = _G["mailButton"..index] or CreateFrame("Button", "mailButton"..index, cellFrame, "UIPanelButtonTemplate")--"UIMenuButtonStretchTemplate") UIPanelButtonTemplate
+						--mailButton:SetSize(70, 17)
+						--mailButton:Show()
+						--test:SetText("OPEN")
+						--mailButton:SetPoint("CENTER",-1,0)
+						--print("show "..mailButton:GetName())
+						--local mailButtonTexture = cellFrame:CreateTexture(nil,"ARTWORK")
+						--mailButtonTexture:SetTexture("Interface\\AddOns\\NovaBooking\\Media\\mail")
+						--mailButtonTexture:SetPoint("CENTER")
+						--mailButtonTexture:SetSize(25,10)
+						
+						--local mailButton = AceGUI:Create("Button")
+						--mailButton:SetPoint("CENTER", cellFrame)
+						--mailButton:SetText("OPEN")
+						
+						--mailButton:SetScript("OnClick", function()
+							
+						--mailButton:SetCallback("OnClick", function()
+						
 						cellFrame.text:SetTextColor(1,1,1)
 						cellFrame.text:SetText('OPEN')
-					
+						
 						cellFrame:SetScript("OnClick", function() 
 							if isMailOpen == false then
 								print("Go to the mailbox dumbass!")
@@ -2249,7 +2324,7 @@ end
 ---------------------------------------------- ADD CLIENT -------------------------------------------
 -----------------------------------------------------------------------------------------------------
 
-local function addEditButton(row,acCheckboxInhouse,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acCheckboxClient,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acCheckboxNormal,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acCheckboxAlliance,acCheckboxHorde,acEditboxGold,acMultiEditboxDiscordLink,acMultiEditboxNotes,acEditboxName,acDropDownTypeValue,acCheckboxOpenHistory, acFrame)
+local function addEditButton(row,acCheckboxInhouse,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acCheckboxClient,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acCheckboxNormal,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acCheckboxAlliance,acCheckboxHorde,acEditboxGold,acMultiEditboxDiscordLink,acMultiEditboxNotes,acEditboxName,acDropDownTypeValue,acCheckboxOpenHistory, acFrame,acEditboxTrialAdvertiser,acDropdownTypeForCollector)
 	local acAdvType
 	local acAdvCut
 	if acCheckboxInhouse == true then
@@ -2291,9 +2366,17 @@ local function addEditButton(row,acCheckboxInhouse,acEditboxAdvertiserCutsInhous
 	local discord = acMultiEditboxDiscordLink
 	local notes = acMultiEditboxNotes
 	local client = acEditboxName
-	if notes == "" then notes = " " end
+	--if notes == "" then notes = " " end
 	if client == "" then client = " " end
-	if discord == "" then discord = " " end
+	--if discord == "" then discord = " " end
+	
+	local collectBoostType = ""
+	local collectTrialAdvertiser = ""
+	if acDropDownTypeValue == "Collect" then
+		collectBoostType = acDropdownTypeForCollector
+		collectTrialAdvertiser = acEditboxTrialAdvertiser
+	end
+	
 	
 	tab = {
 		["Valid"] = true,
@@ -2313,6 +2396,8 @@ local function addEditButton(row,acCheckboxInhouse,acEditboxAdvertiserCutsInhous
 		["AdvertiserCut"] = tonumber(acAdvCut),
 		["AdvertiserCutGold"] = tonumber(acAdvCutGold),
 		["AdvertiserCutType"] = tonumber(acAdvType),
+		["CollectBoostType"] = collectBoostType,
+		["CollectTrialAdvertiser"] = collectTrialAdvertiser,
 	}
 	
 	
@@ -2328,6 +2413,8 @@ local function addEditButton(row,acCheckboxInhouse,acEditboxAdvertiserCutsInhous
 		NovaBookingHistory[row].AdvertiserCut = tonumber(acAdvCut)
 		NovaBookingHistory[row].AdvertiserCutGold = tonumber(acAdvCutGold)
 		NovaBookingHistory[row].AdvertiserCutType = tonumber(acAdvType)
+		NovaBookingHistory[row].CollectBoostType = collectBoostType
+		NovaBookingHistory[row].CollectTrialAdvertiser = collectTrialAdvertiser
 	else
 		tinsert(NovaBookingHistory, tab)
 	end
@@ -2367,12 +2454,77 @@ local function setCuts(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCut
 
 end
 
+local function createWidgetDropdown(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES,acGroupDropdownTypeSG,acGroupDropdownType,acFrame,value,row)
+	local acDropdown = AceGUI:Create("Dropdown")
+	acDropdown:SetWidth(220)
+	acDropdown:SetList(BOOST_TYPES)
+	acDropdown:SetLabel("Boost Type*")
+	acDropdown:SetText(BOOST_TYPES[1])
+	acDropdown:SetValue(1)
+	acDropdown:SetCallback("OnValueChanged",function(widget,event,value)
+		acDropdownTypeCallback(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES,acGroupDropdownTypeSG,acGroupDropdownType,acFrame,value,row)
+	end)
+	return acDropdown
+end
+
+local function createWidgetDropdown2(BOOST_TYPES)
+	local acDropdown = AceGUI:Create("Dropdown")
+	acDropdown:SetWidth(220)
+	acDropdown:SetList(BOOST_TYPES)
+	acDropdown:SetLabel("Boost Type*")
+	acDropdown:SetText(BOOST_TYPES[1])
+	acDropdown:SetValue(1)
+	return acDropdown
+end
+
+local function createWidgetEditboxAdvertiserName()
+	local acEditboxName = AceGUI:Create("EditBox")
+	acEditboxName:SetWidth(220)
+	acEditboxName:SetLabel("Trial Advertiser Name*")
+	return acEditboxName
+end
+
+function acDropdownTypeCallback(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES,acGroupDropdownTypeSG,acGroupDropdownType,acFrame,value,row)
+
+	setCuts(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES)
+
+	if BOOST_TYPES[value] == "Collect" then
+		acDropdownTypeForCollector = createWidgetDropdown2(BOOST_TYPES)
+		acDropdownTypeForCollector:SetWidth(110)
+		acDropdownType:SetWidth(110)
+		acEditboxTrialAdvertiser = createWidgetEditboxAdvertiserName()
+		acGroupDropdownTypeSG:AddChild(acDropdownTypeForCollector)
+		acGroupDropdownType:AddChild(acEditboxTrialAdvertiser)
+		acFrame:SetHeight(715)
+		if row > 0 then
+			for i=1, #BOOST_TYPES do
+				if BOOST_TYPES[i] == NovaBookingHistory[row].CollectBoostType then
+					acDropdownTypeForCollector:SetValue(i)
+					break
+				end
+			end
+			acEditboxTrialAdvertiser:SetText(NovaBookingHistory[row].CollectTrialAdvertiser)
+			acDropdownTypeForCollector:SetText(NovaBookingHistory[row].CollectBoostType)
+		end
+	else
+		acGroupDropdownType:ReleaseChildren()
+		acGroupDropdownTypeSG = AceGUI:Create("SimpleGroup")
+		acGroupDropdownTypeSG:SetLayout("Flow")
+		acGroupDropdownType:AddChild(acGroupDropdownTypeSG)
+		acDropdownType = createWidgetDropdown(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES,acGroupDropdownTypeSG,acGroupDropdownType,acFrame,value,row)
+		acDropdownType:SetValue(value)
+		acDropdownType:SetText(BOOST_TYPES[value])
+		acGroupDropdownTypeSG:AddChild(acDropdownType)
+		acFrame:SetHeight(670)
+	end
+end
+
 function addEditClientToHistory(row)
 	------------------------
 	-- Add Client Main Frame
 	local acFrame = AceGUI:Create("Frame")
 	acFrame:SetWidth(350)
-	acFrame:SetHeight(665)
+	acFrame:SetHeight(670)
 	acFrame:SetTitle("Add Client")
 	acFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
 	
@@ -2574,20 +2726,45 @@ function addEditClientToHistory(row)
 	end
 
 	local acGroupDropdownType = AceGUI:Create("InlineGroup")
+	local acGroupDropdownTypeSG = AceGUI:Create("SimpleGroup")
+	acGroupDropdownTypeSG:SetLayout("Flow")
+	acGroupDropdownType:AddChild(acGroupDropdownTypeSG)
 	
-	local acDropdownType = AceGUI:Create("Dropdown")
-	acDropdownType:SetWidth(220)
-	acDropdownType:SetList(BOOST_TYPES)
-	acDropdownType:SetLabel("Boost Type*")
-	acDropdownType:SetText(BOOST_TYPES[1])
-	acDropdownType:SetValue(1)
+	
+	local acDropdownType = createWidgetDropdown(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES,acGroupDropdownTypeSG,acGroupDropdownType,acFrame,value,row)
+	acGroupDropdownTypeSG:AddChild(acDropdownType)
 	
 	setCuts(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES)
 	
+	acEditboxTrialAdvertiser = createWidgetEditboxAdvertiserName()
+	acDropdownTypeForCollector = createWidgetDropdown2(BOOST_TYPES)
 	
 	acDropdownType:SetCallback("OnValueChanged",function(widget,event,value)
-		setCuts(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES)
+		acDropdownTypeCallback(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES,acGroupDropdownTypeSG,acGroupDropdownType,acFrame,value,row)
+	
+		--[[setCuts(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES)
+
+		if BOOST_TYPES[value] == "Collect" then
+			acDropdownTypeForCollector = createWidgetDropdown(BOOST_TYPES)
+			acDropdownTypeForCollector:SetWidth(110)
+			acDropdownType:SetWidth(110)
+			acEditboxTrialAdvertiser = createWidgetEditboxAdvertiserName()
+			acGroupDropdownTypeSG:AddChild(acDropdownTypeForCollector)
+			acGroupDropdownType:AddChild(acEditboxTrialAdvertiser)
+			acFrame:SetHeight(710)
+		else
+			acGroupDropdownType:ReleaseChildren()
+			acGroupDropdownTypeSG = AceGUI:Create("SimpleGroup")
+			acGroupDropdownType:AddChild(acGroupDropdownTypeSG)
+			acDropdownType = createWidgetDropdown(BOOST_TYPES)
+			acDropdownType:SetValue(value)
+			acDropdownType:SetText(BOOST_TYPES[value])
+			acGroupDropdownTypeSG:AddChild(acDropdownType)
+			acFrame:SetHeight(670)
+		end]]
 	end )
+	
+	
 	
 	acCheckboxAlliance:SetCallback("OnValueChanged",function(widget,event,value)
 		if value == true then
@@ -2608,7 +2785,7 @@ function addEditClientToHistory(row)
 	acGroupFaction:AddChild(acCheckboxAlliance)
 	acGroupFaction:AddChild(acCheckboxHorde)
 	
-	acGroupDropdownType:AddChild(acDropdownType)
+	
 	
 	------------------------
 	-- DiscordLink & Notes
@@ -2645,7 +2822,7 @@ function addEditClientToHistory(row)
 	acButtonAdd:SetText("Add Client")
 	acButtonAdd:SetWidth(180)
 	acButtonAdd:SetCallback("OnClick", function()
-		addEditButton(row,acCheckboxInhouse:GetValue(),acEditboxAdvertiserCutsInhouse:GetText(),acEditboxAdvertiserCutsInhouseDropdown:GetValue(),acCheckboxClient:GetValue(),acEditboxAdvertiserCutsClient:GetText(),acEditboxAdvertiserCutsClientDropdown:GetValue(),acCheckboxNormal:GetValue(),acEditboxAdvertiserCutsNormal:GetText(),acEditboxAdvertiserCutsNormalDropdown:GetValue(),acCheckboxAlliance:GetValue(),acCheckboxHorde:GetValue(),acEditboxGold:GetText(),acMultiEditboxDiscordLink:GetText(),acMultiEditboxNotes:GetText(),acEditboxName:GetText(),BOOST_TYPES[acDropdownType:GetValue()],acCheckboxOpenHistory:GetValue(),acFrame)
+		addEditButton(row,acCheckboxInhouse:GetValue(),acEditboxAdvertiserCutsInhouse:GetText(),acEditboxAdvertiserCutsInhouseDropdown:GetValue(),acCheckboxClient:GetValue(),acEditboxAdvertiserCutsClient:GetText(),acEditboxAdvertiserCutsClientDropdown:GetValue(),acCheckboxNormal:GetValue(),acEditboxAdvertiserCutsNormal:GetText(),acEditboxAdvertiserCutsNormalDropdown:GetValue(),acCheckboxAlliance:GetValue(),acCheckboxHorde:GetValue(),acEditboxGold:GetText(),acMultiEditboxDiscordLink:GetText(),acMultiEditboxNotes:GetText(),acEditboxName:GetText(),BOOST_TYPES[acDropdownType:GetValue()],acCheckboxOpenHistory:GetValue(),acFrame,acEditboxTrialAdvertiser:GetText(),BOOST_TYPES[acDropdownTypeForCollector:GetValue()])
 	end)
 	
 	local acGroupButtonAdd = AceGUI:Create("SimpleGroup")
@@ -2681,6 +2858,7 @@ function addEditClientToHistory(row)
 				break
 			end
 		end
+		
 		if NovaBookingHistory[row].ClientType == "Inhouse" then
 			acCheckboxInhouse:SetValue(true)
 			acCheckboxNormal:SetValue(false)
@@ -2724,6 +2902,11 @@ function addEditClientToHistory(row)
 		
 		--EDIT Button
 		acButtonAdd:SetText("Edit Client")
+		
+		
+		if NovaBookingHistory[row].BoostType == "Collect" then
+			acDropdownTypeCallback(acCheckboxAlliance,acCheckboxHorde,acEditboxAdvertiserCutsNormal,acEditboxAdvertiserCutsNormalDropdown,acEditboxAdvertiserCutsClient,acEditboxAdvertiserCutsClientDropdown,acEditboxAdvertiserCutsInhouse,acEditboxAdvertiserCutsInhouseDropdown,acDropdownType,BOOST_TYPES,acGroupDropdownTypeSG,acGroupDropdownType,acFrame,acDropdownType:GetValue(),row)
+		end
 	end
 	
 end
@@ -2889,86 +3072,67 @@ NovaBookingTrade_OnLoad(frame)
 -----------------------------------------------------------------------------------------------------
 ---------------------------------------------- SYNCING ----------------------------------------------
 -----------------------------------------------------------------------------------------------------
---[[
-function SyncSendData(i)
-	local SyncChar
-	if englishFaction == "Alliance" then
-		SyncChar = SyncAllianceChar
-	end
-	if englishFaction == "Horde" then
-		SyncChar = SyncHordeChar
-	end
-	for _,characterName in pairs(SyncChar) do
-		
-		if string.lower(characterName) ~= string.lower(GetUnitName("player").."-"..realmName) then
-			print("send Request")
-			
-			--nova:SendCommMessage("NovaBooking","SyncRequest","WHISPER","Nostihord-KultderVerdammten")
-
-			if nova:SendCommMessage("NovaBooking", string.format("%s;%s;%s;%s;%s;%s;%d;%s;%s;%s;%s", NovaBookingHistory[i].ID, NovaBookingHistory[i].Timestamp, NovaBookingHistory[i].Client, NovaBookingHistory[i].ClientType, NovaBookingHistory[i].BoostType, NovaBookingHistory[i].Gold, NovaBookingHistory[i].IsSent, NovaBookingHistory[i].Notes, NovaBookingHistory[i].Accountname, NovaBookingHistory[i].LastChanged, NovaBookingHistory[i].Faction), "WHISPER", characterName) then
-				print("ERROR: Sync to character didn't work")
-			end
-			
-		end
-	end
-end
-]]
 
 function SyncSendData(i)
 	--print("Sending Message "..i)
-	local boolToString
-	local discord = ""
-	if NovaBookingHistory[i].IsSent == true then 
-		--print(i.." "..NovaBookingHistory[i].IsSent) 
-		boolToString = "true" 
-	else 
-		--print(i.." "..NovaBookingHistory[i].IsSent)
-		boolToString = "false" 
-	end
-	if NovaBookingHistory[i].DiscordLink ~= nil and string.len(NovaBookingHistory[i].DiscordLink) > 30 then
-		discord = string.sub(NovaBookingHistory[i].DiscordLink,30)
-	end
-	nova:SendCommMessage("NovaBooking", string.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s", NovaBookingHistory[i].ID, NovaBookingHistory[i].Timestamp, NovaBookingHistory[i].Client, NovaBookingHistory[i].ClientType, NovaBookingHistory[i].BoostType, tostring(NovaBookingHistory[i].Gold/1000), boolToString, NovaBookingHistory[i].Notes, NovaBookingHistory[i].Accountname, NovaBookingHistory[i].LastChanged, NovaBookingHistory[i].Faction, NovaBookingHistory[i].AdvertiserCut, tostring(NovaBookingHistory[i].AdvertiserCutGold/1000), NovaBookingHistory[i].AdvertiserCutType,discord), "RAID", "CHANNEL")
+	
+	--Load the libraries
+	local libC = LibStub:GetLibrary("LibCompress")
+	local libCE = libC:GetAddonEncodeTable()
+	
+	--Serialize and compress the data
+	local data = NovaBookingHistory[i]
+	local one = nova:Serialize(data)
+	local two = libC:CompressHuffman(one)
+	local message = libCE:Encode(two)
+	
+	--Send it via an addon message
+	nova:SendCommMessage("NovaBooking", message, "RAID", "CHANNEL", "BULK")
 	--print("Sending Message "..i.." DONE")
 end
 
 function SyncStoreData(message)
-	--print(message)
-	--print(mysplit(message,";"))
-
+	--Load the libraries
+	local libC = LibStub:GetLibrary("LibCompress")
+	local libCE = libC:GetAddonEncodeTable()
+	
+	-- Decode the compressed data
+	local one = libCE:Decode(message)
+	
+	--Decompress the decoded data
+	local two, message = libC:Decompress(one)
+	if(not two) then
+		print("NovaBooking: error decompressing: " .. message)
+		return
+	end
+	
+	-- Deserialize the decompressed data
+	local success, receivedMessage = nova:Deserialize(two)
+	if (not success) then
+		print("NovaBooking: error deserializing " .. receivedMessage)
+		return
+	end
+	
 	local foundData = false
-	local receivedMessage = mysplit(message,";")
-
 	for i,k in pairs(NovaBookingHistory) do
-		if k.ID == receivedMessage[1] and k.Timestamp == receivedMessage[2] and k.Client == receivedMessage[3] then
+		if k.ID == receivedMessage.ID and k.Timestamp == receivedMessage.Timestamp and k.Client == receivedMessage.Client then
 			foundData = true
 			
-			--print("found same data "..i.." - check lastChanged")
-			--print(getTimestamp(k.LastChanged).." - "..getTimestamp(receivedMessage[10]))
-			
-			if getTimestamp(k.LastChanged) < getTimestamp(receivedMessage[10]) then
-				--print("LastChanged: "..i.."; isSent: "..receivedMessage[7])
-				if receivedMessage[7] == "true" then 
-					k.IsSent = true
-				else
-					k.IsSent = false
-				end
-				local discord = ""
-				if receivedMessage[15] ~= nil and receivedMessage[15] ~= "" then
-					discord = "https://discord.com/channels/"..receivedMessage[15]
-				end
-				
-				k.ClientType = receivedMessage[4]
-				k.BoostType = receivedMessage[5]
-				k.Gold = tonumber(receivedMessage[6])*1000
-				k.Notes = receivedMessage[8]
-				k.Accountname = receivedMessage[9]
-				k.LastChanged = receivedMessage[10]
-				k.Faction = receivedMessage[11]
-				k.AdvertiserCut = tonumber(receivedMessage[12])
-				k.AdvertiserCutGold = tonumber(receivedMessage[13])*1000
-				k.AdvertiserCutType = tonumber(receivedMessage[14])
-				k.DiscordLink = discord
+			if getTimestamp(k.LastChanged) < getTimestamp(receivedMessage.LastChanged) then
+				k.IsSent = receivedMessage.IsSent
+				k.ClientType = receivedMessage.ClientType
+				k.BoostType = receivedMessage.BoostType
+				k.Gold = receivedMessage.Gold
+				k.Notes = receivedMessage.Notes
+				k.Accountname = receivedMessage.Accountname
+				k.LastChanged = receivedMessage.LastChanged
+				k.Faction = receivedMessage.Faction
+				k.AdvertiserCut = receivedMessage.AdvertiserCut
+				k.AdvertiserCutGold = receivedMessage.AdvertiserCutGold
+				k.AdvertiserCutType = receivedMessage.AdvertiserCutType
+				k.DiscordLink = receivedMessage.DiscordLink
+				k.CollectTrialAdvertiser = receivedMessage.CollectTrialAdvertiser
+				k.CollectBoostType = receivedMessage.CollectBoostType
 				
 				SyncedRowsChanged = SyncedRowsChanged + 1
 				
@@ -2978,54 +3142,41 @@ function SyncStoreData(message)
 			end
 		end
 	end
-	--table.sort(NovaBookingHistory, sort_timestamp)
-
-	--print(getTimestamp(NovaBookingHistory[1].Timestamp..":00"))
+	
 	if not foundData then
-		--print("not in list - adding")
-		local convertIsSent
-		if receivedMessage[7] == "true" then 
-			convertIsSent = true
-		else
-			convertIsSent = false
-		end
-		local discord = receivedMessage[15]
-		if receivedMessage[15] ~= nil and receivedMessage[15] ~= "" then
-			discord = "https://discord.com/channels/"..receivedMessage[15]
-		end
-		
 		local new = {
 			["Valid"] = true,
 			["Index"] = #NovaBookingHistory+1,
-			["Gold"] = tonumber(receivedMessage[6])*1000,
-			["IsSent"] = convertIsSent,
-			["Timestamp"] = receivedMessage[2],
-			["Client"] = receivedMessage[3],
-			["BoostType"] = receivedMessage[5],
-			["ClientType"] = receivedMessage[4],
-			["Faction"] = receivedMessage[11],
-			["DiscordLink"] = discord,
-			["Notes"] = receivedMessage[8],
-			["ID"] = receivedMessage[1],
-			["Accountname"] = receivedMessage[9],
-			["LastChanged"] = receivedMessage[10],
-			["AdvertiserCut"] = tonumber(receivedMessage[12]),
-			["AdvertiserCutGold"] = tonumber(receivedMessage[13])*1000,
-			["AdvertiserCutType"] = tonumber(receivedMessage[14]),
+			["Gold"] = receivedMessage.Gold,
+			["IsSent"] = receivedMessage.IsSent,
+			["Timestamp"] = receivedMessage.Timestamp,
+			["Client"] = receivedMessage.Client,
+			["BoostType"] = receivedMessage.BoostType,
+			["ClientType"] = receivedMessage.ClientType,
+			["Faction"] = receivedMessage.Faction,
+			["DiscordLink"] = receivedMessage.DiscordLink,
+			["Notes"] = receivedMessage.Notes,
+			["ID"] = receivedMessage.ID,
+			["Accountname"] = receivedMessage.Accountname,
+			["LastChanged"] = receivedMessage.LastChanged,
+			["AdvertiserCut"] = receivedMessage.AdvertiserCut,
+			["AdvertiserCutGold"] = receivedMessage.AdvertiserCutGold,
+			["AdvertiserCutType"] = receivedMessage.AdvertiserCutType,
+			["CollectTrialAdvertiser"] = receivedMessage.CollectTrialAdvertiser,
+			["CollectBoostType"] = receivedMessage.CollectBoostType,
 		}
 		
 		tinsert(NovaBookingHistory, new)
 		
 		SyncedRowsAdded = SyncedRowsAdded + 1
 		
-		--print("Sort...")
 		sortBookings()
 
 		if boosthistoryST ~= nil then
 			setHistoryData()
 		end
-	end	
-
+	end
+	
 end
 
 function nova:OnCommReceived(prefix, message, distribution, sender)
@@ -3111,6 +3262,8 @@ function nova:OnInitialize()
 	
 	LibStub("AceConfig-3.0"):RegisterOptionsTable(title, myOptionsTable)
   	LibStub("AceConfigDialog-3.0"):AddToBlizOptions(title, title)
+	
+	LoadAddOn("LibCompress")
 	
 	nova:RegisterComm("NovaBooking")
 end
@@ -3326,7 +3479,7 @@ function nova:ADDON_LOADED(event, ...)
 		preferredIndex = 3,
       }
 	  StaticPopupDialogs["NOVABOOKING_SYNC_SEND"] = {
-		text = "Blizzard is only allowing to share ~20 messages. Please fill out the id of the runs you want to share: ",
+		text = "Blizzard is only allowing to share ~5 messages. Please fill out the id of the runs you want to share: ",
 		button1 = "Send data",
 		button2 = CANCEL,
 		OnShow = function(this, ...)
