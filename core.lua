@@ -107,7 +107,7 @@ local myOptionsTable = {
 				},
 				CheckBoxShowScreenshotButton = {
 					type = 'toggle',
-					name = 'Show "Take Screenshots and Send Mail" Button',
+					name = 'Show "Open History Page" button on mailbox',
 					order = 3,
 					width = 'full',
 					set = 'SetOption',
@@ -2929,19 +2929,14 @@ function nova:MAIL_SHOW(event, ...)
 		ScreenshotsAndSendButton:Show()
 	end
 	
-	ScreenshotsAndSendButton:SetSize(120, 50)
-	ScreenshotsAndSendButton:SetPoint("BOTTOM", "SendMailFrame", "BOTTOMRIGHT", -104, 37)
-	ScreenshotsAndSendButton:SetText("Take Screenshots\nand Send Mail")
-	ScreenshotsAndSendButton:RegisterForClicks("AnyUp")
+	ScreenshotsAndSendButton:SetSize(130, 40)
+	ScreenshotsAndSendButton:SetPoint("BOTTOM", "SendMailFrame", "BOTTOMRIGHT", -95, 45)
+	ScreenshotsAndSendButton:SetText("Open History Page")
+	--ScreenshotsAndSendButton:RegisterForClicks("AnyUp")
 
 	ScreenshotsAndSendButton:SetScript("OnClick", function(self)
-		local name = SendMailNameEditBox:GetText()
-		local subject = SendMailSubjectEditBox:GetText()
-		local body = SendMailBodyEditBox:GetText()
-		if name ~= "" and subject ~= "" then
-			Screenshot()
-			SendMail(SendMailNameEditBox:GetText(), SendMailSubjectEditBox:GetText(), SendMailBodyEditBox:GetText())
-			Nova__wait(1,Nova_takeScreenshot)
+		if historyOpened == false then
+			ShowHistory()
 		end
 	end)
 end
