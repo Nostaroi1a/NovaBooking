@@ -203,7 +203,28 @@ local myOptionsTable = {
 			name = 'Banking Characters',
 			order = 5,
 			args = {
-			}
+				Profiles = {
+					type = 'group',
+					name = 'Active Profile',
+					inline = true,
+					args = {
+						Profile_A = {
+							type = 'toggle',
+							name = 'Profile A',
+							order = 1,
+							get = 'GetOption',
+							set = 'SetOption',
+						},
+						Profile_B = {
+							type = 'toggle',
+							name = 'Profile B',
+							order = 2,
+							get = 'GetOption',
+							set = 'SetOption',
+						},
+					},
+				},
+			},
 		},
 	}
 }
@@ -214,11 +235,11 @@ local myDefaultOptions = {
 		["Account"] = "",
 		["OpenHistoryAddClient"] = true,
 		["OpenHistoryOnMailbox"] = true,
-		["Version"] = 1
+		["Version"] = 6
 	},
 	["Mailing"] = {
 		["InputSubjectPrefix"] = "NBC",
-		["CheckBoxShowScreenshotButton"] = true
+		["CheckBoxShowScreenshotButton"] = false
 	},
 	["Boosts"] = {
 		["InputBoostTyp1"] = "M+",
@@ -233,8 +254,8 @@ local myDefaultOptions = {
 	["AdvertiserCuts"] = {
 		["Mounts"] = {
 			["Normal"] = {
-				["Horde"] = "17",
-				["Alliance"] = "20",
+				["Horde"] = "25",
+				["Alliance"] = "25",
 				["AllianceType"] = 1,
 				["HordeType"] = 1,
 			},
@@ -253,7 +274,7 @@ local myDefaultOptions = {
 		},
 		["Raid"] = {
 			["Normal"] = {
-				["Horde"] = "17",
+				["Horde"] = "20",
 				["Alliance"] = "20",
 				["AllianceType"] = 1,
 				["HordeType"] = 1,
@@ -273,8 +294,8 @@ local myDefaultOptions = {
 		},
 		["Torghast"] = {
 			["Normal"] = {
-				["Horde"] = "17",
-				["Alliance"] = "20",
+				["Horde"] = "30",
+				["Alliance"] = "30",
 				["AllianceType"] = 1,
 				["HordeType"] = 1,
 			},
@@ -313,8 +334,8 @@ local myDefaultOptions = {
 		},
 		["PVP"] = {
 			["Normal"] = {
-				["Horde"] = "13",
-				["Alliance"] = "20",
+				["Horde"] = "25",
+				["Alliance"] = "25",
 				["AllianceType"] = 1,
 				["HordeType"] = 1,
 			},
@@ -325,7 +346,7 @@ local myDefaultOptions = {
 				["HordeType"] = 1,
 			},
 			["Inhouse"] = {
-				["Horde"] = "3",
+				["Horde"] = "7",
 				["Alliance"] = "7",
 				["AllianceType"] = 1,
 				["HordeType"] = 1,
@@ -333,7 +354,7 @@ local myDefaultOptions = {
 		},
 		["Legacy"] = {
 			["Normal"] = {
-				["Horde"] = "17",
+				["Horde"] = "20",
 				["Alliance"] = "20",
 				["AllianceType"] = 1,
 				["HordeType"] = 1,
@@ -353,8 +374,8 @@ local myDefaultOptions = {
 		},
 		["M+"] = {
 			["Normal"] = {
-				["Horde"] = "17",
-				["Alliance"] = "20",
+				["Horde"] = "30",
+				["Alliance"] = "30",
 				["AllianceType"] = 1,
 				["HordeType"] = 1,
 			},
@@ -373,8 +394,8 @@ local myDefaultOptions = {
 		},
 		["Curve"] = {
 			["Normal"] = {
-				["Horde"] = "17",
-				["Alliance"] = "20",
+				["Horde"] = "30",
+				["Alliance"] = "30",
 				["AllianceType"] = 1,
 				["HordeType"] = 1,
 			},
@@ -393,1033 +414,2048 @@ local myDefaultOptions = {
 		},
 	},
 	["Banking"] = {
-		["English"] = {
-			["Silvermoon"] = {
-				["Alliance"] = "Novadepot-Silvermoon",
-				["Horde"] = "Hordenova-Silvermoon",
-			},
-			["Ravencrest"] = {
-				["Alliance"] = "Novadepot-Ravencrest",
-				["Horde"] = "Hordenova-Ravencrest",
-			},
-			["Outland"] = {
-				["Alliance"] = "Novadepot-Outland",
-				["Horde"] = "Hordenova-Outland",
-			},
-			["Frostmane"] = {
-				["Alliance"] = "Novadepot-Frostmane",
-				["Horde"] = "Hordenova-Frostmane",
-			},
-			["Grim Batol"] = {
-				["Alliance"] = "Novadepot-Frostmane",
-				["Horde"] = "Hordenova-Frostmane",
-			},
-			["Aggra(português)"] = {
-				["Alliance"] = "Novadepot-Frostmane",
-				["Horde"] = "Hordenova-Frostmane",
-			},
-			["Sylvanas"] = {
-				["Alliance"] = "Novadepot-Sylvanas",
-				["Horde"] = "Hordenova-Sylvanas",
-			},
-			["Auchindoun"] = {
-				["Alliance"] = "Novadepot-Sylvanas",
-				["Horde"] = "Hordenova-Sylvanas",
-			},
-			["Dunemaul"] = {
-				["Alliance"] = "Novadepot-Sylvanas",
-				["Horde"] = "Hordenova-Sylvanas",
-			},
-			["Jaedenar"] = {
-				["Alliance"] = "Novadepot-Sylvanas",
-				["Horde"] = "Hordenova-Sylvanas",
-			},
-			["ArgentDawn"] = {
-				["Alliance"] = "Novadepot-Argentdawn",
-				["Horde"] = "Hordenova-Argentdawn",
-			},
-			["Defias Brotherhood"] = {
-				["Alliance"] = "Novadepot-Defiasbrotherhood",
-				["Horde"] = "Hordenova-DefiasBrotherhood",
-			},
-			["The Venture Co"] = {
-				["Alliance"] = "Novadepot-Defiasbrotherhood",
-				["Horde"] = "Hordenova-DefiasBrotherhood",
-			},
-			["Scarshield Legion"] = {
-				["Alliance"] = "Novadepot-Defiasbrotherhood",
-				["Horde"] = "Hordenova-DefiasBrotherhood",
-			},
-			["Ravenholdt"] = {
-				["Alliance"] = "Novadepot-Defiasbrotherhood",
-				["Horde"] = "Hordenova-DefiasBrotherhood",
-			},
-			["Sporeggar"] = {
-				["Alliance"] = "Novadepot-Defiasbrotherhood",
-				["Horde"] = "Hordenova-DefiasBrotherhood",
-			},
-			["Darkmoon Faire"] = {
-				["Alliance"] = "Novadepot-Defiasbrotherhood",
-				["Horde"] = "Hordenova-DefiasBrotherhood",
-			},
-			["Earthen Ring"] = {
-				["Alliance"] = "Novadepot-Defiasbrotherhood",
-				["Horde"] = "Hordenova-DefiasBrotherhood",
-			},
-			["Tarren Mill"] = {
-				["Alliance"] = "Novadepot-TarrenMill",
-				["Horde"] = "Hordenova-TarrenMill",
-			},
-			["Dentarg"] = {
-				["Alliance"] = "Novadepot-TarrenMill",
-				["Horde"] = "Hordenova-TarrenMill",
-			},
-			["Chamber of Aspects"] = {
-				["Alliance"] = "Novadepot-Chamberofaspects",
-				["Horde"] = "Hordenova-Chamberofaspects",
-			},
-			["Stormscale"] = {
-				["Alliance"] = "Novadepot-Stormscale",
-				["Horde"] = "Hordenova-Stormscale",
-			},
-			["Magtheridon"] = {
-				["Alliance"] = "Novadepot-Magtheridon",
-				["Horde"] = "Hordenova-Magtheridon",
-			},
-			["Ahn'Qiraj"] = {
-				["Alliance"] = "Novadepot-Ahn'qiraj",
-				["Horde"] = "Hordenova-Ahn'qiraj",
-			},
-			["Balnazzar"] = {
-				["Alliance"] = "Novadepot-Ahn'qiraj",
-				["Horde"] = "Hordenova-Ahn'qiraj",
-			},
-			["Boulderfist"] = {
-				["Alliance"] = "Novadepot-Ahn'qiraj",
-				["Horde"] = "Hordenova-Ahn'qiraj",
-			},
-			["Chromaggus"] = {
-				["Alliance"] = "Novadepot-Ahn'qiraj",
-				["Horde"] = "Hordenova-Ahn'qiraj",
-			},
-			["Daggerspine"] = {
-				["Alliance"] = "Novadepot-Ahn'qiraj",
-				["Horde"] = "Hordenova-Ahn'qiraj",
-			},
-			["Laughing Skull"] = {
-				["Alliance"] = "Novadepot-Ahn'qiraj",
-				["Horde"] = "Hordenova-Ahn'qiraj",
-			},
-			["Shattered Halls"] = {
-				["Alliance"] = "Novadepot-Ahn'qiraj",
-				["Horde"] = "Hordenova-Ahn'qiraj",
-			},
-			["Sunstrider"] = {
-				["Alliance"] = "Novadepot-Ahn'qiraj",
-				["Horde"] = "Hordenova-Ahn'qiraj",
-			},
-			["Talnivarr"] = {
-				["Alliance"] = "Novadepot-Ahn'qiraj",
-				["Horde"] = "Hordenova-Ahn'qiraj",
-			},
-			["Trollbane"] = {
-				["Alliance"] = "Novadepot-Ahn'qiraj",
-				["Horde"] = "Hordenova-Ahn'qiraj",
-			},
-			["Stormreaver"] = {
-				["Alliance"] = "Novadepot-Stormreaver",
-				["Horde"] = "Hordenova-Stormreaver",
-			},
-			["Dragonmaw"] = {
-				["Alliance"] = "Novadepot-Stormreaver",
-				["Horde"] = "Hordenova-Stormreaver",
-			},
-			["Haomarush"] = {
-				["Alliance"] = "Novadepot-Stormreaver",
-				["Horde"] = "Hordenova-Stormreaver",
-			},
-			["Spinebreaker"] = {
-				["Alliance"] = "Novadepot-Stormreaver",
-				["Horde"] = "Hordenova-Stormreaver",
-			},
-			["Vashj"] = {
-				["Alliance"] = "Novadepot-Stormreaver",
-				["Horde"] = "Hordenova-Stormreaver",
-			},
-			["Drak'Thul"] = {
-				["Alliance"] = "Novadepot-Drak'Thul",
-				["Horde"] = "Hordenova-Drak'Thul",
-			},
-			["Burning Blade"] = {
-				["Alliance"] = "Novadepot-Drak'Thul",
-				["Horde"] = "Hordenova-Drak'Thul",
-			},
-			["Draenor"] = {
-				["Alliance"] = "Novadepot-Draenor",
-				["Horde"] = "Hordenova-Draenor",
-			},
-			["Arathor"] = {
-				["Alliance"] = "Novadepot-Arathor",
-				["Horde"] = "Hordenova-Arathor",
-			},
-			["Hellfire"] = {
-				["Alliance"] = "Novadepot-Arathor",
-				["Horde"] = "Hordenova-Arathor",
-			},
-			["Runetotem"] = {
-				["Alliance"] = "Novadepot-Arathor",
-				["Horde"] = "Hordenova-Arathor",
-			},
-			["Kilrogg"] = {
-				["Alliance"] = "Novadepot-Arathor",
-				["Horde"] = "Hordenova-Arathor",
-			},
-			["Nagrand"] = {
-				["Alliance"] = "Novadepot-Arathor",
-				["Horde"] = "Hordenova-Arathor",
-			},
-			["Quel'Thalas"] = {
-				["Alliance"] = "Novadepot-Quel'thalas",
-				["Horde"] = "Hordenova-Quel'thalas",
-			},
-			["Azjol-Nerub"] = {
-				["Alliance"] = "Novadepot-Quel'thalas",
-				["Horde"] = "Hordenova-Quel'thalas",
-			},
-			["Darkspear"] = {
-				["Alliance"] = "Novadepot-Darkspear",
-				["Horde"] = "Hordenova-Darkspear",
-			},
-			["Terokkar"] = {
-				["Alliance"] = "Novadepot-Darkspear",
-				["Horde"] = "Hordenova-Darkspear",
-			},
-			["Saurfang"] = {
-				["Alliance"] = "Novadepot-Darkspear",
-				["Horde"] = "Hordenova-Darkspear",
-			},
-			["Burning Steppes"] = {
-				["Alliance"] = "Novadepot-Darkspear",
-				["Horde"] = "Hordenova-Darkspear",
-			},
-			["Kor'gall"] = {
-				["Alliance"] = "Novadepot-Darkspear",
-				["Horde"] = "Hordenova-Darkspear",
-			},
-			["Executus"] = {
-				["Alliance"] = "Novadepot-Darkspear",
-				["Horde"] = "Hordenova-Darkspear",
-			},
-			["Bloodfeather"] = {
-				["Alliance"] = "Novadepot-Darkspear",
-				["Horde"] = "Hordenova-Darkspear",
-			},
-			["Shattered Hand"] = {
-				["Alliance"] = "Novadepot-Darkspear",
-				["Horde"] = "Hordenova-Darkspear",
-			},
-			["Aszune"] = {
-				["Alliance"] = "Novadepot-Aszune",
-				["Horde"] = "Hordenova-Aszune",
-			},
-			["Shadowsong"] = {
-				["Alliance"] = "Novadepot-Aszune",
-				["Horde"] = "Hordenova-Aszune",
-			},
-			["Khadgar"] = {
-				["Alliance"] = "Novadepot-Khadgar",
-				["Horde"] = "Hordenova-Khadgar",
-			},
-			["Bloodhoof"] = {
-				["Alliance"] = "Novadepot-Khadgar",
-				["Horde"] = "Hordenova-Khadgar",
-			},
-			["Nordrassil"] = {
-				["Alliance"] = "Novadepot-Nordrassil",
-				["Horde"] = "Hordenova-Nordrassil",
-			},
-			["Bronze Dragonflight"] = {
-				["Alliance"] = "Novadepot-Nordrassil",
-				["Horde"] = "Hordenova-Nordrassil",
-			},
-			["Lightbringer"] = {
-				["Alliance"] = "Novadepot-Lightbringer",
-				["Horde"] = "Hordenova-Lightbringer",
-			},
-			["Mazrigos"] = {
-				["Alliance"] = "Novadepot-Lightbringer",
-				["Horde"] = "Hordenova-Lightbringer",
-			},
-			["Stormrage"] = {
-				["Alliance"] = "Novadepot-Stormrage",
-				["Horde"] = "Hordenova-Stormrage",
-			},
-			["Azuremyst"] = {
-				["Alliance"] = "Novadepot-Stormrage",
-				["Horde"] = "Hordenova-Stormrage",
-			},
-			["The Maelstrom"] = {
-				["Alliance"] = "Novadepot-Themaelstrom",
-				["Horde"] = "Hordenova-Themaelstrom",
-			},
-			["Deathwing"] = {
-				["Alliance"] = "Novadepot-Themaelstrom",
-				["Horde"] = "Hordenova-Themaelstrom",
-			},
-			["Lightning's Blade"] = {
-				["Alliance"] = "Novadepot-Themaelstrom",
-				["Horde"] = "Hordenova-Themaelstrom",
-			},
-			["Karazhan"] = {
-				["Alliance"] = "Novadepot-Themaelstrom",
-				["Horde"] = "Hordenova-Themaelstrom",
-			},
-			["Dragonblight"] = {
-				["Alliance"] = "Novadepot-Themaelstrom",
-				["Horde"] = "Hordenova-Themaelstrom",
-			},
-			["Ghostlands"] = {
-				["Alliance"] = "Novadepot-Themaelstrom",
-				["Horde"] = "Hordenova-Themaelstrom",
-			},
-			["Aerie Peak"] = {
-				["Alliance"] = "Novadepot-Aeriepeak",
-				["Horde"] = "Hordenova-Aeriepeak",
-			},
-			["Bronzebeard"] = {
-				["Alliance"] = "Novadepot-Aeriepeak",
-				["Horde"] = "Hordenova-Aeriepeak",
-			},
-			["Vek'Nilash"] = {
-				["Alliance"] = "Novadepot-Aeriepeak",
-				["Horde"] = "Hordenova-Aeriepeak",
-			},
-			["Eonar"] = {
-				["Alliance"] = "Novadepot-Aeriepeak",
-				["Horde"] = "Hordenova-Aeriepeak",
-			},
-			["Blade's Edge"] = {
-				["Alliance"] = "Novadepot-Aeriepeak",
-				["Horde"] = "Hordenova-Aeriepeak",
-			},
-			["Alonsus"] = {
-				["Alliance"] = "Novadepot-Alonsus",
-				["Horde"] = "Hordenova-Alonsus",
-			},
-			["Kul Tiras"] = {
-				["Alliance"] = "Novadepot-Alonsus",
-				["Horde"] = "Hordenova-Alonsus",
-			},
-			["Anachronos"] = {
-				["Alliance"] = "Novadepot-Alonsus",
-				["Horde"] = "Hordenova-Alonsus",
-			},
-			["Emerald Dream"] = {
-				["Alliance"] = "Novadepot-Emeralddream",
-				["Horde"] = "Hordenova-Emeralddream",
-			},
-			["Terenas"] = {
-				["Alliance"] = "Novadepot-Emeralddream",
-				["Horde"] = "Hordenova-Emeralddream",
-			},
-			["Steamwheedle Cartel"] = {
-				["Alliance"] = "Novadepot-Steamwheedlecartel",
-				["Horde"] = "Hordenova-Steamwheedlecartel",
-			},
-			["Emeriss"] = {
-				["Alliance"] = "Novadepot-Emeriss",
-				["Horde"] = "Hordenova-Emeriss",
-			},
-			["Hakkar"] = {
-				["Alliance"] = "Novadepot-Emeriss",
-				["Horde"] = "Hordenova-Emeriss",
-			},
-			["Crushridge"] = {
-				["Alliance"] = "Novadepot-Emeriss",
-				["Horde"] = "Hordenova-Emeriss",
-			},
-			["Agamaggan"] = {
-				["Alliance"] = "Novadepot-Emeriss",
-				["Horde"] = "Hordenova-Emeriss",
-			},
-			["Bloodscalp"] = {
-				["Alliance"] = "Novadepot-Emeriss",
-				["Horde"] = "Hordenova-Emeriss",
-			},
-			["Twilight's Hammer"] = {
-				["Alliance"] = "Novadepot-Emeriss",
-				["Horde"] = "Hordenova-Emeriss",
-			},
-			["Thunderhorn"] = {
-				["Alliance"] = "Novadepot-Thunderhorn",
-				["Horde"] = "Hordenova-Thunderhorn",
-			},
-			["Wildhammer"] = {
-				["Alliance"] = "Novadepot-Thunderhorn",
-				["Horde"] = "Hordenova-Thunderhorn",
-			},
-			["Aggramar"] = {
-				["Alliance"] = "Novadepot-Aggramar",
-				["Horde"] = "Hordenova-Aggramar",
-			},
-			["Hellscream"] = {
-				["Alliance"] = "Novadepot-Aggramar",
-				["Horde"] = "Hordenova-Aggramar",
-			},
-			["Al'Akir"] = {
-				["Alliance"] = "Novadepot-Al'akir",
-				["Horde"] = "Hordenova-Al'akir",
-			},
-			["Skullcrusher"] = {
-				["Alliance"] = "Novadepot-Al'akir",
-				["Horde"] = "Hordenova-Al'akir",
-			},
-			["Xavius"] = {
-				["Alliance"] = "Novadepot-Al'akir",
-				["Horde"] = "Hordenova-Al'akir",
-			},
-			["Burning Legion"] = {
-				["Alliance"] = "Novadepot-Al'akir",
-				["Horde"] = "Hordenova-Al'akir",
-			},
-			["Doomhammer"] = {
-				["Alliance"] = "Novadepot-Doomhammer",
-				["Horde"] = "Hordenova-Doomhammer",
-			},
-			["Turalyon"] = {
-				["Alliance"] = "Novadepot-Doomhammer",
-				["Horde"] = "Hordenova-Doomhammer",
-			},
-			["Darksorrow"] = {
-				["Alliance"] = "Novadepot-Darksorrow",
-				["Horde"] = "Hordenova-Darksorrow",
-			},
-			["Genjuros"] = {
-				["Alliance"] = "Novadepot-Darksorrow",
-				["Horde"] = "Hordenova-Darksorrow",
-			},
-			["Neptulon"] = {
-				["Alliance"] = "Novadepot-Darksorrow",
-				["Horde"] = "Hordenova-Darksorrow",
-			},
-			["Zenedar"] = {
-				["Alliance"] = "Novadepot-Darksorrow",
-				["Horde"] = "Hordenova-Darksorrow",
-			},
-			["Frostwhisper"] = {
-				["Alliance"] = "Novadepot-Darksorrow",
-				["Horde"] = "Hordenova-Darksorrow",
-			},
-			["Bladefist"] = {
-				["Alliance"] = "Novadepot-Darksorrow",
-				["Horde"] = "Hordenova-Darksorrow",
-			},
-			["Moonglade"] = {
-				["Alliance"] = "Novadepot-Steamwheedlecartel",
-				["Horde"] = "Hordenova-Steamwheedlecartel",
-			},
-			["The Sha'Tar"] = {
-				["Alliance"] = "Novadepot-Steamwheedlecartel",
-				["Horde"] = "Hordenova-Steamwheedlecartel",
-			},
-			["Kazzak"] = {
-				["Alliance"] = "Novadepot-Kazzak",
-				["Horde"] = "Hordenova-Kazzak",
-			},
-			["Ragnaros"] = {
-				["Alliance"] = "Novadepot-Ragnaros",
-				["Horde"] = "Hordenova-Ragnaros",
-			},
-			["Twisting Nether"] = {
-				["Alliance"] = "Novadepot-Twisting Nether",
-				["Horde"] = "Hordenova-TwistingNether",
+		["Profiles"] = {
+			["Profile_A"] = true,
+			["Profile_B"] = false,
+		},
+		["Profile B"] = {
+			["German"] = {
+				["Wrathbringer"] = {
+					["Horde"] = "Pothorde-Tirion",
+					["Alliance"] = "Potalliance-Tirion",
+				},
+				["Mannoroth"] = {
+					["Horde"] = "Pothorde-Gorgonnash",
+					["Alliance"] = "Potalliance-Gorgonnash",
+				},
+				["Tichondrius"] = {
+					["Horde"] = "Pothorde-Blackmoore",
+					["Alliance"] = "Potalliance-Blackmoore",
+				},
+				["Theradras"] = {
+					["Horde"] = "Pothorde-Onyxia",
+					["Alliance"] = "Potalliance-Onyxia",
+				},
+				["Alexstrasza"] = {
+					["Horde"] = "Pothorde-Alexstrasza",
+					["Alliance"] = "Potalliance-Alexstrasza",
+				},
+				["Die ewige Wacht"] = {
+					["Horde"] = "Pothorde-Diesilbernehand",
+					["Alliance"] = "Potalliance-Diesilbernehand",
+				},
+				["Lothar"] = {
+					["Horde"] = "Pothorde-Lothar",
+					["Alliance"] = "Potalliance-Lothar",
+				},
+				["Mug'thol"] = {
+					["Horde"] = "Pothorde-Onyxia",
+					["Alliance"] = "Potalliance-Onyxia",
+				},
+				["Kil'jaeden"] = {
+					["Horde"] = "Pothorde-Anetheron",
+					["Alliance"] = "Potalliance-Anetheron",
+				},
+				["Die Nachtwache"] = {
+					["Horde"] = "Pothorde-Zirkeldescenarius",
+					["Alliance"] = "Potalliance-Zirkeldescenarius",
+				},
+				["Dalvengyr"] = {
+					["Horde"] = "Pothorde-Aman'thul",
+					["Alliance"] = "Potalliance-Aman'thul ",
+				},
+				["Frostwolf"] = {
+					["Horde"] = "Pothorde-Frostwolf",
+					["Alliance"] = "Potalliance-Frostwolf",
+				},
+				["Anub'arak"] = {
+					["Horde"] = "Pothorde-Aman'thul",
+					["Alliance"] = "Potalliance-Aman'thul ",
+				},
+				["Echsenkessel"] = {
+					["Horde"] = "Pothorde-Blackhand",
+					["Alliance"] = "Potalliance-Blackhand",
+				},
+				["Alleria"] = {
+					["Horde"] = "Pothorde-Rexxar",
+					["Alliance"] = "Potalliance-Rexxar",
+				},
+				["Taerar"] = {
+					["Horde"] = "Pothorde-Blackhand",
+					["Alliance"] = "Potalliance-Blackhand",
+				},
+				["Das Konsortium"] = {
+					["Horde"] = "Pothorde-Diesilbernehand",
+					["Alliance"] = "Potalliance-Diesilbernehand",
+				},
+				["Gilneas"] = {
+					["Horde"] = "Pothorde-Gorgonnash",
+					["Alliance"] = "Potalliance-Gorgonnash",
+				},
+				["Perenolde"] = {
+					["Horde"] = "Pothorde-Garrosh",
+					["Alliance"] = "Potalliance-Garrosh",
+				},
+				["Aegwynn"] = {
+					["Horde"] = "Pothorde-Aegwynn",
+					["Alliance"] = "Potalliance-Aegwynn",
+				},
+				["Teldrassil"] = {
+					["Horde"] = "Pothorde-Garrosh",
+					["Alliance"] = "Potalliance-Garrosh",
+				},
+				["Tirion"] = {
+					["Horde"] = "Pothorde-Tirion",
+					["Alliance"] = "Potalliance-Tirion",
+				},
+				["Durotan"] = {
+					["Horde"] = "Pothorde-Tirion",
+					["Alliance"] = "Potalliance-Tirion",
+				},
+				["Blackhand"] = {
+					["Horde"] = "Pothorde-Blackhand",
+					["Alliance"] = "Potalliance-Blackhand",
+				},
+				["Gorgonnash"] = {
+					["Horde"] = "Pothorde-Gorgonnash",
+					["Alliance"] = "Potalliance-Gorgonnash",
+				},
+				["Destromath"] = {
+					["Horde"] = "Pothorde-Gorgonnash",
+					["Alliance"] = "Potalliance-Gorgonnash",
+				},
+				["Ambossar"] = {
+					["Horde"] = "Pothorde-Ambossar",
+					["Alliance"] = "Potalliance-Ambossar",
+				},
+				["Shattrath"] = {
+					["Horde"] = "Pothorde-Garrosh",
+					["Alliance"] = "Potalliance-Garrosh",
+				},
+				["Der Mithrilorden"] = {
+					["Horde"] = "Pothorde-Zirkeldescenarius",
+					["Alliance"] = "Potalliance-Zirkeldescenarius",
+				},
+				["Malorne"] = {
+					["Horde"] = "Pothorde-Ysera",
+					["Alliance"] = "Potalliance-Ysera",
+				},
+				["Un'Goro"] = {
+					["Horde"] = "Pothorde-Area52",
+					["Alliance"] = "Potalliance-Area52",
+				},
+				["Madmortem"] = {
+					["Horde"] = "Pothorde-Alexstrasza",
+					["Alliance"] = "Potalliance-Alexstrasza",
+				},
+				["Nethersturm"] = {
+					["Horde"] = "Pothorde-Alexstrasza",
+					["Alliance"] = "Potalliance-Alexstrasza",
+				},
+				["Eredar"] = {
+					["Horde"] = "Pothorde-Eredar",
+					["Alliance"] = "Potalliance-Eredar",
+				},
+				["Malfurion"] = {
+					["Horde"] = "Pothorde-Malfurion",
+					["Alliance"] = "Potalliance-Malfurion",
+				},
+				["Kargath"] = {
+					["Horde"] = "Pothorde-Ambossar",
+					["Alliance"] = "Potalliance-Ambossar",
+				},
+				["Sen'jin"] = {
+					["Horde"] = "Pothorde-Area52",
+					["Alliance"] = "Potalliance-Area52",
+				},
+				["Der abyssische Rat"] = {
+					["Horde"] = "Pothorde-Diesilbernehand",
+					["Alliance"] = "Potalliance-Diesilbernehand",
+				},
+				["Der Rat von Dalaran"] = {
+					["Horde"] = "Pothorde-Zirkeldescenarius",
+					["Alliance"] = "Potalliance-Zirkeldescenarius",
+				},
+				["Krag'jin"] = {
+					["Horde"] = "Pothorde-Lothar",
+					["Alliance"] = "Potalliance-Lothar",
+				},
+				["Die Aldor"] = {
+					["Horde"] = "Pothorde-Diealdor",
+					["Alliance"] = "Potalliance-Diealdor",
+				},
+				["Lordaeron"] = {
+					["Horde"] = "Pothorde-Blackmoore",
+					["Alliance"] = "Potalliance-Blackmoore",
+				},
+				["Vek'lor"] = {
+					["Horde"] = "Pothorde-Tirion",
+					["Alliance"] = "Potalliance-Tirion",
+				},
+				["Zuluhed"] = {
+					["Horde"] = "Pothorde-Aman'thul",
+					["Alliance"] = "Potalliance-Aman'thul ",
+				},
+				["Onyxia"] = {
+					["Horde"] = "Pothorde-Onyxia",
+					["Alliance"] = "Potalliance-Onyxia",
+				},
+				["Frostmourne"] = {
+					["Horde"] = "Pothorde-Aman'thul",
+					["Alliance"] = "Potalliance-Aman'thul ",
+				},
+				["Nozdormu"] = {
+					["Horde"] = "Pothorde-Garrosh",
+					["Alliance"] = "Potalliance-Garrosh",
+				},
+				["Arthas"] = {
+					["Horde"] = "Pothorde-Tirion",
+					["Alliance"] = "Potalliance-Tirion",
+				},
+				["Azshara"] = {
+					["Horde"] = "Pothorde-Lothar",
+					["Alliance"] = "Potalliance-Lothar",
+				},
+				["Rexxar"] = {
+					["Horde"] = "Pothorde-Rexxar",
+					["Alliance"] = "Potalliance-Rexxar",
+				},
+				["Antonidas"] = {
+					["Horde"] = "Pothorde-Antonidas",
+					["Alliance"] = "Potalliance-Antonidas",
+				},
+				["Blackrock"] = {
+					["Horde"] = "Pothorde-Blackrock",
+					["Alliance"] = "Potalliance-Blackrock",
+				},
+				["Todeswache"] = {
+					["Horde"] = "Pothorde-Zirkeldescenarius",
+					["Alliance"] = "Potalliance-Zirkeldescenarius",
+				},
+				["Norgannon"] = {
+					["Horde"] = "Pothorde-DunMorogh",
+					["Alliance"] = "Potalliance-DunMorogh",
+				},
+				["Das Syndikat"] = {
+					["Horde"] = "Pothorde-Diesilbernehand",
+					["Alliance"] = "Potalliance-Diesilbernehand",
+				},
+				["Malygos"] = {
+					["Horde"] = "Pothorde-Malfurion",
+					["Alliance"] = "Potalliance-Malfurion",
+				},
+				["Festung der Stürme"] = {
+					["Horde"] = "Pothorde-Anetheron",
+					["Alliance"] = "Potalliance-Anetheron",
+				},
+				["Anetheron"] = {
+					["Horde"] = "Pothorde-Anetheron",
+					["Alliance"] = "Potalliance-Anetheron",
+				},
+				["Garrosh"] = {
+					["Horde"] = "Pothorde-Garrosh",
+					["Alliance"] = "Potalliance-Garrosh",
+				},
+				["Terrordar"] = {
+					["Horde"] = "Pothorde-Onyxia",
+					["Alliance"] = "Potalliance-Onyxia",
+				},
+				["Area 52"] = {
+					["Horde"] = "Pothorde-Area52",
+					["Alliance"] = "Potalliance-Area52",
+				},
+				["Dethecus"] = {
+					["Horde"] = "Pothorde-Onyxia",
+					["Alliance"] = "Potalliance-Onyxia",
+				},
+				["Kel'Thuzad"] = {
+					["Horde"] = "Pothorde-Tirion",
+					["Alliance"] = "Potalliance-Tirion",
+				},
+				["Thrall"] = {
+					["Horde"] = "Pothorde-Thrall",
+					["Alliance"] = "Potalliance-Thrall",
+				},
+				["Nera'thor"] = {
+					["Horde"] = "Pothorde-Gorgonnash",
+					["Alliance"] = "Potalliance-Gorgonnash",
+				},
+				["Gul'dan"] = {
+					["Horde"] = "Pothorde-Anetheron",
+					["Alliance"] = "Potalliance-Anetheron",
+				},
+				["Rajaxx"] = {
+					["Horde"] = "Pothorde-Anetheron",
+					["Alliance"] = "Potalliance-Anetheron",
+				},
+				["Nathrezim"] = {
+					["Horde"] = "Pothorde-Anetheron",
+					["Alliance"] = "Potalliance-Anetheron",
+				},
+				["Die Silberne Hand"] = {
+					["Horde"] = "Pothorde-Diesilbernehand",
+					["Alliance"] = "Potalliance-Diesilbernehand",
+				},
+				["Zirkel des Cenarius"] = {
+					["Horde"] = "Pothorde-Zirkeldescenarius",
+					["Alliance"] = "Potalliance-Zirkeldescenarius",
+				},
+				["Blackmoore"] = {
+					["Horde"] = "Pothorde-Blackmoore",
+					["Alliance"] = "Potalliance-Blackmoore",
+				},
+				["Forscheliga"] = {
+					["Horde"] = "Pothorde-Zirkeldescenarius",
+					["Alliance"] = "Potalliance-Zirkeldescenarius",
+				},
+				["Mal'Ganis"] = {
+					["Horde"] = "Pothorde-Blackhand",
+					["Alliance"] = "Potalliance-Blackhand",
+				},
+				["Die Arguswacht"] = {
+					["Horde"] = "Pothorde-Diesilbernehand",
+					["Alliance"] = "Potalliance-Diesilbernehand",
+				},
+				["Arygos"] = {
+					["Horde"] = "Pothorde-Khaz'goroth",
+					["Alliance"] = "Potalliance-Khaz'goroth",
+				},
+				["Die Todeskrallen"] = {
+					["Horde"] = "Pothorde-Diesilbernehand",
+					["Alliance"] = "Potalliance-Diesilbernehand",
+				},
+				["Kult der Verdammten"] = {
+					["Horde"] = "Pothorde-Diesilbernehand",
+					["Alliance"] = "Potalliance-Diesilbernehand",
+				},
+				["Dun Morogh"] = {
+					["Horde"] = "Pothorde-DunMorogh",
+					["Alliance"] = "Potalliance-DunMorogh",
+				},
+				["Baelgun"] = {
+					["Horde"] = "Pothorde-Lothar",
+					["Alliance"] = "Potalliance-Lothar",
+				},
+				["Nefarian"] = {
+					["Horde"] = "Pothorde-Gorgonnash",
+					["Alliance"] = "Potalliance-Gorgonnash",
+				},
+				["Blutkessel"] = {
+					["Horde"] = "Pothorde-Tirion",
+					["Alliance"] = "Potalliance-Tirion",
+				},
+				["Khaz'goroth"] = {
+					["Horde"] = "Pothorde-Khaz'goroth",
+					["Alliance"] = "Potalliance-Khaz'goroth",
+				},
+				["Nazjatar"] = {
+					["Horde"] = "Pothorde-Aman'thul",
+					["Alliance"] = "Potalliance-Aman'thul ",
+				},
+				["Aman'Thul"] = {
+					["Horde"] = "Pothorde-Aman'thul",
+					["Alliance"] = "Potalliance-Aman'thul ",
+				},
+				["Proudmoore"] = {
+					["Horde"] = "Pothorde-Alexstrasza",
+					["Alliance"] = "Potalliance-Alexstrasza",
+				},
+				["Ysera"] = {
+					["Horde"] = "Pothorde-Ysera",
+					["Alliance"] = "Potalliance-Ysera",
+				},
+				["Ulduar"] = {
+					["Horde"] = "Pothorde-Gorgonnash",
+					["Alliance"] = "Potalliance-Gorgonnash",
+				},
+			},
+			["Spanish"] = {
+				["Los Errantes"] = {
+					["Horde"] = "Pothorde-Tyrande",
+					["Alliance"] = "Potalliance-Tyrande",
+				},
+				["Exodar"] = {
+					["Horde"] = "Pothorde-Minahonda",
+					["Alliance"] = "Potalliance-Minahonda",
+				},
+				["Sanguino"] = {
+					["Horde"] = "Pothorde-Sanguino",
+					["Alliance"] = "Potalliance-Sanguino",
+				},
+				["Zul'jin"] = {
+					["Horde"] = "Pothorde-Sanguino",
+					["Alliance"] = "Potalliance-Sanguino",
+				},
+				["Minahonda"] = {
+					["Horde"] = "Pothorde-Minahonda",
+					["Alliance"] = "Potalliance-Minahonda",
+				},
+				["Uldum"] = {
+					["Horde"] = "Pothorde-Sanguino",
+					["Alliance"] = "Potalliance-Sanguino",
+				},
+				["Colinas Pardas"] = {
+					["Horde"] = "Pothorde-Tyrande",
+					["Alliance"] = "Potalliance-Tyrande",
+				},
+				["Shen'dralar"] = {
+					["Horde"] = "Pothorde-Sanguino",
+					["Alliance"] = "Potalliance-Sanguino",
+				},
+				["Dun Modr"] = {
+					["Horde"] = "Pothorde-DunModr",
+					["Alliance"] = "Potalliance-DunModr",
+				},
+				["Tyrande"] = {
+					["Horde"] = "Pothorde-Tyrande",
+					["Alliance"] = "Potalliance-Tyrande",
+				},
+				["C'thun"] = {
+					["Horde"] = "Pothorde-C'thun",
+					["Alliance"] = "Potalliance-C'thun ",
+				},
+			},
+			["Italian"] = {
+				["Pozzo dell'Eternità"] = {
+					["Horde"] = "Pothorde-Pozzo dell'Eternità",
+					["Alliance"] = "Potalliance-Pozzo dell'Eternità",
+				},
+				["Nemesis"] = {
+					["Horde"] = "Pothorde-Nemesis",
+					["Alliance"] = "Potalliance-Nemesis",
+				},
+			},
+			["French"] = {
+				["Conseil Des Ombres"] = {
+					["Horde"] = "Pothorde-Kirintor",
+					["Alliance"] = "Potalliance-Kirintor ",
+				},
+				["Sinstralis"] = {
+					["Horde"] = "Pothorde-Dalaran",
+					["Alliance"] = "Potalliance-Dalaran",
+				},
+				["Chants éternels"] = {
+					["Horde"] = "Hordenova-Chantséternels",
+					["Alliance"] = "Potalliance-Vol'jin",
+				},
+				["Hyjal"] = {
+					["Horde"] = "Pothorde-Hyjal",
+					["Alliance"] = "Potalliance-Hyjal ",
+				},
+				["Naxxramas"] = {
+					["Horde"] = "Pothorde-Illidan",
+					["Alliance"] = "Potalliance-Illidan",
+				},
+				["Varimathras"] = {
+					["Horde"] = "Pothorde-Elune",
+					["Alliance"] = "Potalliance-Elune",
+				},
+				["Krasus"] = {
+					["Horde"] = "Pothorde-Uldaman",
+					["Alliance"] = "Potalliance-Uldaman",
+				},
+				["Arathi"] = {
+					["Horde"] = "Pothorde-Illidan",
+					["Alliance"] = "Potalliance-Illidan",
+				},
+				["Eitrigg"] = {
+					["Horde"] = "Pothorde-Uldaman",
+					["Alliance"] = "Potalliance-Uldaman",
+				},
+				["Kirin Tor"] = {
+					["Horde"] = "Pothorde-Kirintor",
+					["Alliance"] = "Potalliance-Kirintor ",
+				},
+				["Garona"] = {
+					["Horde"] = "Pothorde-Sargeras",
+					["Alliance"] = "Potalliance-Sargeras",
+				},
+				["Vol'jin"] = {
+					["Horde"] = "Hordenova-Chantséternels",
+					["Alliance"] = "Potalliance-Vol'jin",
+				},
+				["Cho'gall"] = {
+					["Horde"] = "Pothorde-Dalaran",
+					["Alliance"] = "Potalliance-Dalaran",
+				},
+				["Ysondre"] = {
+					["Horde"] = "Pothorde-Ysondre",
+					["Alliance"] = "Potalliance-Ysondre ",
+				},
+				["Archimonde"] = {
+					["Horde"] = "Pothorde-Archimonde",
+					["Alliance"] = "Potalliance-Archimonde ",
+				},
+				["Elune"] = {
+					["Horde"] = "Pothorde-Elune",
+					["Alliance"] = "Potalliance-Elune",
+				},
+				["Les Sentinelles"] = {
+					["Horde"] = "Pothorde-Kirintor",
+					["Alliance"] = "Potalliance-Kirintor ",
+				},
+				["Les Clairvoyants"] = {
+					["Horde"] = "Pothorde-Kirintor",
+					["Alliance"] = "Potalliance-Kirintor ",
+				},
+				["Uldaman"] = {
+					["Horde"] = "Pothorde-Uldaman",
+					["Alliance"] = "Potalliance-Uldaman",
+				},
+				["Eldre'Thalas"] = {
+					["Horde"] = "Pothorde-Dalaran",
+					["Alliance"] = "Potalliance-Dalaran",
+				},
+				["Dalaran"] = {
+					["Horde"] = "Pothorde-Dalaran",
+					["Alliance"] = "Potalliance-Dalaran",
+				},
+				["Sargeras"] = {
+					["Horde"] = "Pothorde-Sargeras",
+					["Alliance"] = "Potalliance-Sargeras",
+				},
+				["Kael'Thas"] = {
+					["Horde"] = "Pothorde-Kael'Thas",
+					["Alliance"] = "Potalliance-Kael'Thas",
+				},
+				["Khaz Modan"] = {
+					["Horde"] = "Pothorde-Khazmodan",
+					["Alliance"] = "Potalliance-Khazmodan ",
+				},
+				["Rashgarroth"] = {
+					["Horde"] = "Pothorde-Kael'Thas",
+					["Alliance"] = "Potalliance-Kael'Thas",
+				},
+				["Ner’zhul"] = {
+					["Horde"] = "Pothorde-Sargeras",
+					["Alliance"] = "Potalliance-Sargeras",
+				},
+				["Throk'Feroth"] = {
+					["Horde"] = "Pothorde-Kael'Thas",
+					["Alliance"] = "Potalliance-Kael'Thas",
+				},
+				["Arak-arahm"] = {
+					["Horde"] = "Pothorde-Kael'Thas",
+					["Alliance"] = "Potalliance-Kael'Thas",
+				},
+				["Temple noir"] = {
+					["Horde"] = "Pothorde-Illidan",
+					["Alliance"] = "Potalliance-Illidan",
+				},
+				["La Croisade écarlate"] = {
+					["Horde"] = "Pothorde-Kirintor",
+					["Alliance"] = "Potalliance-Kirintor ",
+				},
+				["Illidan"] = {
+					["Horde"] = "Pothorde-Illidan",
+					["Alliance"] = "Potalliance-Illidan",
+				},
+				["Drek'Thar"] = {
+					["Horde"] = "Pothorde-Uldaman",
+					["Alliance"] = "Potalliance-Uldaman",
+				},
+				["Marécage de Zangar"] = {
+					["Horde"] = "Pothorde-Dalaran",
+					["Alliance"] = "Potalliance-Dalaran",
+				},
+				["Culte de la Rive noire"] = {
+					["Horde"] = "Pothorde-Kirintor",
+					["Alliance"] = "Potalliance-Kirintor ",
+				},
+				["Confrerie du Thorium"] = {
+					["Horde"] = "Pothorde-Kirintor",
+					["Alliance"] = "Potalliance-Kirintor ",
+				},
+				["Medivh , Suramar"] = {
+					["Horde"] = "Pothorde-Medivh",
+					["Alliance"] = "Potalliance-Medivh",
+				},
+			},
+			["English"] = {
+				["The Venture Co"] = {
+					["Horde"] = "Pothorde-Defiasbrotherhood",
+					["Alliance"] = "Potalliance-Defiasbrotherhood",
+				},
+				["Nordrassil"] = {
+					["Horde"] = "Pothorde-Nordrassil",
+					["Alliance"] = "Potalliance-Nordrassil",
+				},
+				["Silvermoon"] = {
+					["Horde"] = "Pothorde-Silvermoon",
+					["Alliance"] = "Potalliance-Silvermoon",
+				},
+				["Kilrogg"] = {
+					["Horde"] = "Pothorde-Arathor",
+					["Alliance"] = "Potalliance-Arathor",
+				},
+				["Ahn'Qiraj"] = {
+					["Horde"] = "Pothorde-Ahn'qiraj",
+					["Alliance"] = "Potalliance-Ahn'qiraj",
+				},
+				["Alonsus"] = {
+					["Horde"] = "Pothorde-Alonsus",
+					["Alliance"] = "Potalliance-Alonsus",
+				},
+				["Anachronos"] = {
+					["Horde"] = "Pothorde-Alonsus",
+					["Alliance"] = "Potalliance-Alonsus",
+				},
+				["Darkspear"] = {
+					["Horde"] = "Pothorde-Darkspear",
+					["Alliance"] = "Potalliance-Darkspear",
+				},
+				["Skullcrusher"] = {
+					["Horde"] = "Pothorde-Al'akir",
+					["Alliance"] = "Potalliance-Al'akir",
+				},
+				["Terokkar"] = {
+					["Horde"] = "Pothorde-Darkspear",
+					["Alliance"] = "Potalliance-Darkspear",
+				},
+				["Aszune"] = {
+					["Horde"] = "Pothorde-Aszune",
+					["Alliance"] = "Potalliance-Aszune",
+				},
+				["Aggra(português)"] = {
+					["Horde"] = "Pothorde-Frostmane",
+					["Alliance"] = "Potalliance-Frostmane",
+				},
+				["Darksorrow"] = {
+					["Horde"] = "Pothorde-Darksorrow",
+					["Alliance"] = "Potalliance-Darksorrow",
+				},
+				["Jaedenar"] = {
+					["Horde"] = "Pothorde-Sylvanas",
+					["Alliance"] = "Potalliance-Sylvanas",
+				},
+				["Runetotem"] = {
+					["Horde"] = "Pothorde-Arathor",
+					["Alliance"] = "Potalliance-Arathor",
+				},
+				["Xavius"] = {
+					["Horde"] = "Pothorde-Al'akir",
+					["Alliance"] = "Potalliance-Al'akir",
+				},
+				["Ravencrest"] = {
+					["Horde"] = "Pothorde-Ravencrest",
+					["Alliance"] = "Potalliance-Ravencrest",
+				},
+				["Draenor"] = {
+					["Horde"] = "Pothorde-Draenor",
+					["Alliance"] = "Potalliance-Draenor",
+				},
+				["Vek'Nilash"] = {
+					["Horde"] = "Pothorde-Aeriepeak",
+					["Alliance"] = "Potalliance-Aeriepeak",
+				},
+				["Deathwing"] = {
+					["Horde"] = "Pothorde-Themaelstrom",
+					["Alliance"] = "Potalliance-Themaelstrom",
+				},
+				["Agamaggan"] = {
+					["Horde"] = "Pothorde-Emeriss",
+					["Alliance"] = "Potalliance-Emeriss",
+				},
+				["Twilight's Hammer"] = {
+					["Horde"] = "Pothorde-Emeriss",
+					["Alliance"] = "Potalliance-Emeriss",
+				},
+				["Aerie Peak"] = {
+					["Horde"] = "Pothorde-Aeriepeak",
+					["Alliance"] = "Potalliance-Aeriepeak",
+				},
+				["Nagrand"] = {
+					["Horde"] = "Pothorde-Arathor",
+					["Alliance"] = "Potalliance-Arathor",
+				},
+				["Vashj"] = {
+					["Horde"] = "Pothorde-Stormreaver",
+					["Alliance"] = "Potalliance-Stormreaver",
+				},
+				["Ragnaros"] = {
+					["Horde"] = "Pothorde-Ragnaros",
+					["Alliance"] = "Potalliance-Ragnaros",
+				},
+				["Boulderfist"] = {
+					["Horde"] = "Pothorde-Ahn'qiraj",
+					["Alliance"] = "Potalliance-Ahn'qiraj",
+				},
+				["Al'Akir"] = {
+					["Horde"] = "Pothorde-Al'akir",
+					["Alliance"] = "Potalliance-Al'akir",
+				},
+				["Auchindoun"] = {
+					["Horde"] = "Pothorde-Sylvanas",
+					["Alliance"] = "Potalliance-Sylvanas",
+				},
+				["Balnazzar"] = {
+					["Horde"] = "Pothorde-Ahn'qiraj",
+					["Alliance"] = "Potalliance-Ahn'qiraj",
+				},
+				["Burning Steppes"] = {
+					["Horde"] = "Pothorde-Darkspear",
+					["Alliance"] = "Potalliance-Darkspear",
+				},
+				["Stormrage"] = {
+					["Horde"] = "Pothorde-Stormrage",
+					["Alliance"] = "Potalliance-Stormrage",
+				},
+				["Quel'Thalas"] = {
+					["Horde"] = "Pothorde-Quel'thalas",
+					["Alliance"] = "Potalliance-Quel'thalas",
+				},
+				["Haomarush"] = {
+					["Horde"] = "Pothorde-Stormreaver",
+					["Alliance"] = "Potalliance-Stormreaver",
+				},
+				["Terenas"] = {
+					["Horde"] = "Pothorde-Emeralddream",
+					["Alliance"] = "Potalliance-Emeralddream",
+				},
+				["Eonar"] = {
+					["Horde"] = "Pothorde-Aeriepeak",
+					["Alliance"] = "Potalliance-Aeriepeak",
+				},
+				["Chamber of Aspects"] = {
+					["Horde"] = "Pothorde-Chamberofaspects",
+					["Alliance"] = "Potalliance-Chamberofaspects",
+				},
+				["Steamwheedle Cartel"] = {
+					["Horde"] = "Pothorde-Steamwheedlecartel",
+					["Alliance"] = "Potalliance-Steamwheedlecartel",
+				},
+				["Neptulon"] = {
+					["Horde"] = "Pothorde-Darksorrow",
+					["Alliance"] = "Potalliance-Darksorrow",
+				},
+				["Thunderhorn"] = {
+					["Horde"] = "Pothorde-Thunderhorn",
+					["Alliance"] = "Potalliance-Thunderhorn",
+				},
+				["Outland"] = {
+					["Horde"] = "Pothorde-Outland",
+					["Alliance"] = "Potalliance-Outland",
+				},
+				["Burning Legion"] = {
+					["Horde"] = "Pothorde-Al'akir",
+					["Alliance"] = "Potalliance-Al'akir",
+				},
+				["Turalyon"] = {
+					["Horde"] = "Pothorde-Doomhammer",
+					["Alliance"] = "Potalliance-Doomhammer",
+				},
+				["Doomhammer"] = {
+					["Horde"] = "Pothorde-Doomhammer",
+					["Alliance"] = "Potalliance-Doomhammer",
+				},
+				["Scarshield Legion"] = {
+					["Horde"] = "Pothorde-Defiasbrotherhood",
+					["Alliance"] = "Potalliance-Defiasbrotherhood",
+				},
+				["Magtheridon"] = {
+					["Horde"] = "Pothorde-Magtheridon",
+					["Alliance"] = "Potalliance-Magtheridon",
+				},
+				["Daggerspine"] = {
+					["Horde"] = "Pothorde-Ahn'qiraj",
+					["Alliance"] = "Potalliance-Ahn'qiraj",
+				},
+				["Azjol-Nerub"] = {
+					["Horde"] = "Pothorde-Quel'thalas",
+					["Alliance"] = "Potalliance-Quel'thalas",
+				},
+				["Crushridge"] = {
+					["Horde"] = "Pothorde-Emeriss",
+					["Alliance"] = "Potalliance-Emeriss",
+				},
+				["Moonglade"] = {
+					["Horde"] = "Pothorde-Steamwheedlecartel",
+					["Alliance"] = "Potalliance-Steamwheedlecartel",
+				},
+				["Spinebreaker"] = {
+					["Horde"] = "Pothorde-Stormreaver",
+					["Alliance"] = "Potalliance-Stormreaver",
+				},
+				["Aggramar"] = {
+					["Horde"] = "Pothorde-Aggramar",
+					["Alliance"] = "Potalliance-Aggramar",
+				},
+				["Genjuros"] = {
+					["Horde"] = "Pothorde-Darksorrow",
+					["Alliance"] = "Potalliance-Darksorrow",
+				},
+				["Saurfang"] = {
+					["Horde"] = "Pothorde-Darkspear",
+					["Alliance"] = "Potalliance-Darkspear",
+				},
+				["Frostwhisper"] = {
+					["Horde"] = "Pothorde-Darksorrow",
+					["Alliance"] = "Potalliance-Darksorrow",
+				},
+				["Shattered Halls"] = {
+					["Horde"] = "Pothorde-Ahn'qiraj",
+					["Alliance"] = "Potalliance-Ahn'qiraj",
+				},
+				["Dentarg"] = {
+					["Horde"] = "Pothorde-TarrenMill",
+					["Alliance"] = "Potalliance-TarrenMill",
+				},
+				["Twisting Nether"] = {
+					["Horde"] = "Pothorde-TwistingNether",
+					["Alliance"] = "Potalliance-Twisting Nether",
+				},
+				["Shadowsong"] = {
+					["Horde"] = "Pothorde-Aszune",
+					["Alliance"] = "Potalliance-Aszune",
+				},
+				["Kazzak"] = {
+					["Horde"] = "Pothorde-Kazzak",
+					["Alliance"] = "Potalliance-Kazzak",
+				},
+				["Sporeggar"] = {
+					["Horde"] = "Pothorde-Defiasbrotherhood",
+					["Alliance"] = "Potalliance-Defiasbrotherhood",
+				},
+				["Bladefist"] = {
+					["Horde"] = "Pothorde-Darksorrow",
+					["Alliance"] = "Potalliance-Darksorrow",
+				},
+				["Bloodhoof"] = {
+					["Horde"] = "Pothorde-Khadgar",
+					["Alliance"] = "Potalliance-Khadgar",
+				},
+				["Dragonmaw"] = {
+					["Horde"] = "Pothorde-Stormreaver",
+					["Alliance"] = "Potalliance-Stormreaver",
+				},
+				["Drak'Thul"] = {
+					["Horde"] = "Pothorde-Drak'Thul",
+					["Alliance"] = "Potalliance-Drak'Thul",
+				},
+				["Dunemaul"] = {
+					["Horde"] = "Pothorde-Sylvanas",
+					["Alliance"] = "Potalliance-Sylvanas",
+				},
+				["Defias Brotherhood"] = {
+					["Horde"] = "Pothorde-Defiasbrotherhood",
+					["Alliance"] = "Potalliance-Defiasbrotherhood",
+				},
+				["Bloodscalp"] = {
+					["Horde"] = "Pothorde-Emeriss",
+					["Alliance"] = "Potalliance-Emeriss",
+				},
+				["Tarren Mill"] = {
+					["Horde"] = "Pothorde-TarrenMill",
+					["Alliance"] = "Potalliance-TarrenMill",
+				},
+				["Burning Blade"] = {
+					["Horde"] = "Pothorde-Drak'Thul",
+					["Alliance"] = "Potalliance-Drak'Thul",
+				},
+				["Laughing Skull"] = {
+					["Horde"] = "Pothorde-Ahn'qiraj",
+					["Alliance"] = "Potalliance-Ahn'qiraj",
+				},
+				["Lightbringer"] = {
+					["Horde"] = "Pothorde-Lightbringer",
+					["Alliance"] = "Potalliance-Lightbringer",
+				},
+				["Dragonblight"] = {
+					["Horde"] = "Pothorde-Themaelstrom",
+					["Alliance"] = "Potalliance-Themaelstrom",
+				},
+				["Frostmane"] = {
+					["Horde"] = "Pothorde-Frostmane",
+					["Alliance"] = "Potalliance-Frostmane",
+				},
+				["Emerald Dream"] = {
+					["Horde"] = "Pothorde-Emeralddream",
+					["Alliance"] = "Potalliance-Emeralddream",
+				},
+				["Kor'gall"] = {
+					["Horde"] = "Pothorde-Darkspear",
+					["Alliance"] = "Potalliance-Darkspear",
+				},
+				["The Sha'Tar"] = {
+					["Horde"] = "Pothorde-Steamwheedlecartel",
+					["Alliance"] = "Potalliance-Steamwheedlecartel",
+				},
+				["Mazrigos"] = {
+					["Horde"] = "Pothorde-Lightbringer",
+					["Alliance"] = "Potalliance-Lightbringer",
+				},
+				["Talnivarr"] = {
+					["Horde"] = "Pothorde-Ahn'qiraj",
+					["Alliance"] = "Potalliance-Ahn'qiraj",
+				},
+				["Wildhammer"] = {
+					["Horde"] = "Pothorde-Thunderhorn",
+					["Alliance"] = "Potalliance-Thunderhorn",
+				},
+				["Sylvanas"] = {
+					["Horde"] = "Pothorde-Sylvanas",
+					["Alliance"] = "Potalliance-Sylvanas",
+				},
+				["The Maelstrom"] = {
+					["Horde"] = "Pothorde-Themaelstrom",
+					["Alliance"] = "Potalliance-Themaelstrom",
+				},
+				["Hellfire"] = {
+					["Horde"] = "Pothorde-Arathor",
+					["Alliance"] = "Potalliance-Arathor",
+				},
+				["Azuremyst"] = {
+					["Horde"] = "Pothorde-Stormrage",
+					["Alliance"] = "Potalliance-Stormrage",
+				},
+				["Darkmoon Faire"] = {
+					["Horde"] = "Pothorde-Defiasbrotherhood",
+					["Alliance"] = "Potalliance-Defiasbrotherhood",
+				},
+				["Zenedar"] = {
+					["Horde"] = "Pothorde-Darksorrow",
+					["Alliance"] = "Potalliance-Darksorrow",
+				},
+				["Ghostlands"] = {
+					["Horde"] = "Pothorde-Themaelstrom",
+					["Alliance"] = "Potalliance-Themaelstrom",
+				},
+				["Blade's Edge"] = {
+					["Horde"] = "Pothorde-Aeriepeak",
+					["Alliance"] = "Potalliance-Aeriepeak",
+				},
+				["Bronze Dragonflight"] = {
+					["Horde"] = "Pothorde-Nordrassil",
+					["Alliance"] = "Potalliance-Nordrassil",
+				},
+				["Hellscream"] = {
+					["Horde"] = "Pothorde-Aggramar",
+					["Alliance"] = "Potalliance-Aggramar",
+				},
+				["Stormscale"] = {
+					["Horde"] = "Pothorde-Stormscale",
+					["Alliance"] = "Potalliance-Stormscale",
+				},
+				["Khadgar"] = {
+					["Horde"] = "Pothorde-Khadgar",
+					["Alliance"] = "Potalliance-Khadgar",
+				},
+				["Bronzebeard"] = {
+					["Horde"] = "Pothorde-Aeriepeak",
+					["Alliance"] = "Potalliance-Aeriepeak",
+				},
+				["Arathor"] = {
+					["Horde"] = "Pothorde-Arathor",
+					["Alliance"] = "Potalliance-Arathor",
+				},
+				["Bloodfeather"] = {
+					["Horde"] = "Pothorde-Darkspear",
+					["Alliance"] = "Potalliance-Darkspear",
+				},
+				["Executus"] = {
+					["Horde"] = "Pothorde-Darkspear",
+					["Alliance"] = "Potalliance-Darkspear",
+				},
+				["Hakkar"] = {
+					["Horde"] = "Pothorde-Emeriss",
+					["Alliance"] = "Potalliance-Emeriss",
+				},
+				["Kul Tiras"] = {
+					["Horde"] = "Pothorde-Alonsus",
+					["Alliance"] = "Potalliance-Alonsus",
+				},
+				["Lightning's Blade"] = {
+					["Horde"] = "Pothorde-Themaelstrom",
+					["Alliance"] = "Potalliance-Themaelstrom",
+				},
+				["Sunstrider"] = {
+					["Horde"] = "Pothorde-Ahn'qiraj",
+					["Alliance"] = "Potalliance-Ahn'qiraj",
+				},
+				["Earthen Ring"] = {
+					["Horde"] = "Pothorde-Defiasbrotherhood",
+					["Alliance"] = "Potalliance-Defiasbrotherhood",
+				},
+				["Emeriss"] = {
+					["Horde"] = "Pothorde-Emeriss",
+					["Alliance"] = "Potalliance-Emeriss",
+				},
+				["Trollbane"] = {
+					["Horde"] = "Pothorde-Ahn'qiraj",
+					["Alliance"] = "Potalliance-Ahn'qiraj",
+				},
+				["Grim Batol"] = {
+					["Horde"] = "Pothorde-Frostmane",
+					["Alliance"] = "Potalliance-Frostmane",
+				},
+				["Stormreaver"] = {
+					["Horde"] = "Pothorde-Stormreaver",
+					["Alliance"] = "Potalliance-Stormreaver",
+				},
+				["Karazhan"] = {
+					["Horde"] = "Pothorde-Themaelstrom",
+					["Alliance"] = "Potalliance-Themaelstrom",
+				},
+				["Ravenholdt"] = {
+					["Horde"] = "Pothorde-Defiasbrotherhood",
+					["Alliance"] = "Potalliance-Defiasbrotherhood",
+				},
+				["Shattered Hand"] = {
+					["Horde"] = "Pothorde-Darkspear",
+					["Alliance"] = "Potalliance-Darkspear",
+				},
+				["Chromaggus"] = {
+					["Horde"] = "Pothorde-Ahn'qiraj",
+					["Alliance"] = "Potalliance-Ahn'qiraj",
+				},
+				["ArgentDawn"] = {
+					["Horde"] = "Pothorde-Argentdawn",
+					["Alliance"] = "Potalliance-Argentdawn",
+				},
 			},
 		},
-		["Spanish"] = {
-			["Dun Modr"] = {
-				["Alliance"] = "Novadepot-Dunmodr",
-				["Horde"] = "Hordenova-Dunmodr",
-			},
-			["Sanguino"] = {
-				["Alliance"] = "Novadepot-Sanguino",
-				["Horde"] = "Hordenova-Sanguino",
-			},
-			["Shen'dralar"] = {
-				["Alliance"] = "Novadepot-Sanguino",
-				["Horde"] = "Hordenova-Sanguino",
-			},
-			["Uldum"] = {
-				["Alliance"] = "Novadepot-Sanguino",
-				["Horde"] = "Hordenova-Sanguino",
-			},
-			["Zul'jin"] = {
-				["Alliance"] = "Novadepot-Sanguino",
-				["Horde"] = "Hordenova-Sanguino",
-			},
-			["C'thun"] = {
-				["Alliance"] = "Novadepot-C'thun ",
-				["Horde"] = "Hordenova-C'thun",
-			},
-			["Tyrande"] = {
-				["Alliance"] = "Novadepot-Tyrande",
-				["Horde"] = "Hordenova-Tyrande",
-			},
-			["Colinas Pardas"] = {
-				["Alliance"] = "Novadepot-Tyrande",
-				["Horde"] = "Hordenova-Tyrande",
-			},
-			["Los Errantes"] = {
-				["Alliance"] = "Novadepot-Tyrande",
-				["Horde"] = "Hordenova-Tyrande",
-			},
-			["Minahonda"] = {
-				["Alliance"] = "Novadepot-Minahonda",
-				["Horde"] = "Hordenova-Minahonda",
-			},
-			["Exodar"] = {
-				["Alliance"] = "Novadepot-Minahonda",
-				["Horde"] = "Hordenova-Minahonda",
-			},
-		},
-		["Italian"] = {
-			["Nemesis"] = {
-				["Alliance"] = "Novadepot-Nemesis",
-				["Horde"] = "Hordenova-Nemesis",
-			},
-			["Pozzo dell'Eternità"] = {
-				["Alliance"] = "Novadepot-Pozzo dell'Eternità",
-				["Horde"] = "Hordenova-Pozzo dell'Eternità",
-			},
-		},
-		["German"] = {
-			["Antonidas"] = {
-				["Alliance"] = "Novadepot-Antonidas",
-				["Horde"] = "Hordenova-Antonidas",
-			},
-			["Aegwynn"] = {
-				["Alliance"] = "Novadepot-Aegwynn",
-				["Horde"] = "Hordenova-Aegwynn",
-			},
-			["Blackmoore"] = {
-				["Alliance"] = "Novadepot-Blackmoore",
-				["Horde"] = "Hordenova-Blackmoore",
-			},
-			["Lordaeron"] = {
-				["Alliance"] = "Novadepot-Blackmoore",
-				["Horde"] = "Hordenova-Blackmoore",
-			},
-			["Tichondrius"] = {
-				["Alliance"] = "Novadepot-Blackmoore",
-				["Horde"] = "Hordenova-Blackmoore",
-			},
-			["Malfurion"] = {
-				["Alliance"] = "Novadepot-Malfurion",
-				["Horde"] = "Hordenova-Malfurion",
-			},
-			["Malygos"] = {
-				["Alliance"] = "Novadepot-Malfurion",
-				["Horde"] = "Hordenova-Malfurion",
-			},
-			["Blackhand"] = {
-				["Alliance"] = "Novadepot-Blackhand",
-				["Horde"] = "Hordenova-Blackhand",
-			},
-			["Mal'Ganis"] = {
-				["Alliance"] = "Novadepot-Blackhand",
-				["Horde"] = "Hordenova-Blackhand",
-			},
-			["Taerar"] = {
-				["Alliance"] = "Novadepot-Blackhand",
-				["Horde"] = "Hordenova-Blackhand",
-			},
-			["Echsenkessel"] = {
-				["Alliance"] = "Novadepot-Blackhand",
-				["Horde"] = "Hordenova-Blackhand",
-			},
-			["Rexxar"] = {
-				["Alliance"] = "Novadepot-Rexxar",
-				["Horde"] = "Hordenova-Rexxar",
-			},
-			["Alleria"] = {
-				["Alliance"] = "Novadepot-Rexxar",
-				["Horde"] = "Hordenova-Rexxar",
-			},
-			["Die Aldor"] = {
-				["Alliance"] = "Novadepot-Diealdor",
-				["Horde"] = "Hordenova-Diealdor",
-			},
-			["Alexstrasza"] = {
-				["Alliance"] = "Novadepot-Alexstrasza",
-				["Horde"] = "Hordenova-Alexstrasza",
-			},
-			["Nethersturm"] = {
-				["Alliance"] = "Novadepot-Alexstrasza",
-				["Horde"] = "Hordenova-Alexstrasza",
-			},
-			["Madmortem"] = {
-				["Alliance"] = "Novadepot-Alexstrasza",
-				["Horde"] = "Hordenova-Alexstrasza",
-			},
-			["Proudmoore"] = {
-				["Alliance"] = "Novadepot-Alexstrasza",
-				["Horde"] = "Hordenova-Alexstrasza",
-			},
-			["Area 52"] = {
-				["Alliance"] = "Novadepot-Area52",
-				["Horde"] = "Hordenova-Area52",
-			},
-			["Sen'jin"] = {
-				["Alliance"] = "Novadepot-Area52",
-				["Horde"] = "Hordenova-Area52",
-			},
-			["Un'Goro"] = {
-				["Alliance"] = "Novadepot-Area52",
-				["Horde"] = "Hordenova-Area52",
-			},
-			["Gorgonnash"] = {
-				["Alliance"] = "Novadepot-Gorgonnash",
-				["Horde"] = "Hordenova-Gorgonnash",
-			},
-			["Destromath"] = {
-				["Alliance"] = "Novadepot-Gorgonnash",
-				["Horde"] = "Hordenova-Gorgonnash",
-			},
-			["Mannoroth"] = {
-				["Alliance"] = "Novadepot-Gorgonnash",
-				["Horde"] = "Hordenova-Gorgonnash",
-			},
-			["Nefarian"] = {
-				["Alliance"] = "Novadepot-Gorgonnash",
-				["Horde"] = "Hordenova-Gorgonnash",
-			},
-			["Nera'thor"] = {
-				["Alliance"] = "Novadepot-Gorgonnash",
-				["Horde"] = "Hordenova-Gorgonnash",
-			},
-			["Gilneas"] = {
-				["Alliance"] = "Novadepot-Gorgonnash",
-				["Horde"] = "Hordenova-Gorgonnash",
-			},
-			["Ulduar"] = {
-				["Alliance"] = "Novadepot-Gorgonnash",
-				["Horde"] = "Hordenova-Gorgonnash",
-			},
-			["Ambossar"] = {
-				["Alliance"] = "Novadepot-Ambossar",
-				["Horde"] = "Hordenova-Ambossar",
-			},
-			["Kargath"] = {
-				["Alliance"] = "Novadepot-Ambossar",
-				["Horde"] = "Hordenova-Ambossar",
-			},
-			["Ysera"] = {
-				["Alliance"] = "Novadepot-Ysera",
-				["Horde"] = "Hordenova-Ysera",
-			},
-			["Malorne"] = {
-				["Alliance"] = "Novadepot-Ysera",
-				["Horde"] = "Hordenova-Ysera",
-			},
-			["Garrosh"] = {
-				["Alliance"] = "Novadepot-Garrosh",
-				["Horde"] = "Hordenova-Garrosh",
-			},
-			["Nozdormu"] = {
-				["Alliance"] = "Novadepot-Garrosh",
-				["Horde"] = "Hordenova-Garrosh",
-			},
-			["Shattrath"] = {
-				["Alliance"] = "Novadepot-Garrosh",
-				["Horde"] = "Hordenova-Garrosh",
-			},
-			["Perenolde"] = {
-				["Alliance"] = "Novadepot-Garrosh",
-				["Horde"] = "Hordenova-Garrosh",
-			},
-			["Teldrassil"] = {
-				["Alliance"] = "Novadepot-Garrosh",
-				["Horde"] = "Hordenova-Garrosh",
-			},
-			["Aman'Thul"] = {
-				["Alliance"] = "Novadepot-Aman'thul ",
-				["Horde"] = "Hordenova-Aman'thul",
-			},
-			["Anub'arak"] = {
-				["Alliance"] = "Novadepot-Aman'thul ",
-				["Horde"] = "Hordenova-Aman'thul",
-			},
-			["Dalvengyr"] = {
-				["Alliance"] = "Novadepot-Aman'thul ",
-				["Horde"] = "Hordenova-Aman'thul",
-			},
-			["Frostmourne"] = {
-				["Alliance"] = "Novadepot-Aman'thul ",
-				["Horde"] = "Hordenova-Aman'thul",
-			},
-			["Nazjatar"] = {
-				["Alliance"] = "Novadepot-Aman'thul ",
-				["Horde"] = "Hordenova-Aman'thul",
-			},
-			["Zuluhed"] = {
-				["Alliance"] = "Novadepot-Aman'thul ",
-				["Horde"] = "Hordenova-Aman'thul",
-			},
-			["Khaz'goroth"] = {
-				["Alliance"] = "Novadepot-Khaz'goroth",
-				["Horde"] = "Hordenova-Khaz'goroth",
-			},
-			["Arygos"] = {
-				["Alliance"] = "Novadepot-Khaz'goroth",
-				["Horde"] = "Hordenova-Khaz'goroth",
-			},
-			["Tirion"] = {
-				["Alliance"] = "Novadepot-Tirion",
-				["Horde"] = "Hordenova-Tirion",
-			},
-			["Durotan"] = {
-				["Alliance"] = "Novadepot-Tirion",
-				["Horde"] = "Hordenova-Tirion",
-			},
-			["Arthas"] = {
-				["Alliance"] = "Novadepot-Tirion",
-				["Horde"] = "Hordenova-Tirion",
-			},
-			["Blutkessel"] = {
-				["Alliance"] = "Novadepot-Tirion",
-				["Horde"] = "Hordenova-Tirion",
-			},
-			["Kel'Thuzad"] = {
-				["Alliance"] = "Novadepot-Tirion",
-				["Horde"] = "Hordenova-Tirion",
-			},
-			["Vek'lor"] = {
-				["Alliance"] = "Novadepot-Tirion",
-				["Horde"] = "Hordenova-Tirion",
-			},
-			["Wrathbringer"] = {
-				["Alliance"] = "Novadepot-Tirion",
-				["Horde"] = "Hordenova-Tirion",
-			},
-			["Baelgun"] = {
-				["Alliance"] = "Novadepot-Lothar",
-				["Horde"] = "Hordenova-Lothar",
-			},
-			["Lothar"] = {
-				["Alliance"] = "Novadepot-Lothar",
-				["Horde"] = "Hordenova-Lothar",
-			},
-			["Azshara"] = {
-				["Alliance"] = "Novadepot-Lothar",
-				["Horde"] = "Hordenova-Lothar",
-			},
-			["Krag'jin"] = {
-				["Alliance"] = "Novadepot-Lothar",
-				["Horde"] = "Hordenova-Lothar",
-			},
-			["Dun Morogh"] = {
-				["Alliance"] = "Novadepot-DunMorogh",
-				["Horde"] = "Hordenova-DunMorogh",
-			},
-			["Norgannon"] = {
-				["Alliance"] = "Novadepot-DunMorogh",
-				["Horde"] = "Hordenova-DunMorogh",
-			},
-			["Die Silberne Hand"] = {
-				["Alliance"] = "Novadepot-Diesilbernehand",
-				["Horde"] = "Hordenova-Diesilbernehand",
-			},
-			["Die ewige Wacht"] = {
-				["Alliance"] = "Novadepot-Diesilbernehand",
-				["Horde"] = "Hordenova-Diesilbernehand",
-			},
-			["Kult der Verdammten"] = {
-				["Alliance"] = "Novadepot-Diesilbernehand",
-				["Horde"] = "Hordenova-Diesilbernehand",
-			},
-			["Der abyssische Rat"] = {
-				["Alliance"] = "Novadepot-Diesilbernehand",
-				["Horde"] = "Hordenova-Diesilbernehand",
-			},
-			["Die Todeskrallen"] = {
-				["Alliance"] = "Novadepot-Diesilbernehand",
-				["Horde"] = "Hordenova-Diesilbernehand",
-			},
-			["Das Konsortium"] = {
-				["Alliance"] = "Novadepot-Diesilbernehand",
-				["Horde"] = "Hordenova-Diesilbernehand",
-			},
-			["Die Arguswacht"] = {
-				["Alliance"] = "Novadepot-Diesilbernehand",
-				["Horde"] = "Hordenova-Diesilbernehand",
-			},
-			["Das Syndikat"] = {
-				["Alliance"] = "Novadepot-Diesilbernehand",
-				["Horde"] = "Hordenova-Diesilbernehand",
-			},
-			["Zirkel des Cenarius"] = {
-				["Alliance"] = "Novadepot-Zirkeldescenarius",
-				["Horde"] = "Hordenova-Zirkeldescenarius",
-			},
-			["Todeswache"] = {
-				["Alliance"] = "Novadepot-Zirkeldescenarius",
-				["Horde"] = "Hordenova-Zirkeldescenarius",
-			},
-			["Der Rat von Dalaran"] = {
-				["Alliance"] = "Novadepot-Zirkeldescenarius",
-				["Horde"] = "Hordenova-Zirkeldescenarius",
-			},
-			["Der Mithrilorden"] = {
-				["Alliance"] = "Novadepot-Zirkeldescenarius",
-				["Horde"] = "Hordenova-Zirkeldescenarius",
-			},
-			["Forscheliga"] = {
-				["Alliance"] = "Novadepot-Zirkeldescenarius",
-				["Horde"] = "Hordenova-Zirkeldescenarius",
-			},
-			["Die Nachtwache"] = {
-				["Alliance"] = "Novadepot-Zirkeldescenarius",
-				["Horde"] = "Hordenova-Zirkeldescenarius",
-			},
-			["Onyxia"] = {
-				["Alliance"] = "Novadepot-Onyxia",
-				["Horde"] = "Hordenova-Onyxia",
-			},
-			["Dethecus"] = {
-				["Alliance"] = "Novadepot-Onyxia",
-				["Horde"] = "Hordenova-Onyxia",
-			},
-			["Mug'thol"] = {
-				["Alliance"] = "Novadepot-Onyxia",
-				["Horde"] = "Hordenova-Onyxia",
-			},
-			["Terrordar"] = {
-				["Alliance"] = "Novadepot-Onyxia",
-				["Horde"] = "Hordenova-Onyxia",
-			},
-			["Theradras"] = {
-				["Alliance"] = "Novadepot-Onyxia",
-				["Horde"] = "Hordenova-Onyxia",
-			},
-			["Anetheron"] = {
-				["Alliance"] = "Novadepot-Anetheron",
-				["Horde"] = "Hordenova-Anetheron",
-			},
-			["Festung der Stürme"] = {
-				["Alliance"] = "Novadepot-Anetheron",
-				["Horde"] = "Hordenova-Anetheron",
-			},
-			["Gul'dan"] = {
-				["Alliance"] = "Novadepot-Anetheron",
-				["Horde"] = "Hordenova-Anetheron",
-			},
-			["Kil'jaeden"] = {
-				["Alliance"] = "Novadepot-Anetheron",
-				["Horde"] = "Hordenova-Anetheron",
-			},
-			["Nathrezim"] = {
-				["Alliance"] = "Novadepot-Anetheron",
-				["Horde"] = "Hordenova-Anetheron",
-			},
-			["Rajaxx"] = {
-				["Alliance"] = "Novadepot-Anetheron",
-				["Horde"] = "Hordenova-Anetheron",
-			},
-			["Thrall"] = {
-				["Alliance"] = "Novadepot-Thrall",
-				["Horde"] = "Hordenova-Thrall",
-			},
-			["Blackrock"] = {
-				["Alliance"] = "Nbcbackup-Blackrock",
-				["Horde"] = "Hordenova-Blackrock",
-			},
-			["Eredar"] = {
-				["Alliance"] = "Novadepot-Eredar",
-				["Horde"] = "Hordenova-Eredar",
-			},
-			["Frostwolf"] = {
-				["Alliance"] = "Novadepot-Frostwolf",
-				["Horde"] = "Hordenova-Frostwolf",
-			},
-		},
-		["French"] = {
-			["Archimonde"] = {
-				["Alliance"] = "Novadepot-Archimonde ",
-				["Horde"] = "Hordenova-Archimonde",
-			},
-			["Khaz Modan"] = {
-				["Alliance"] = "Novadepot-Khazmodan ",
-				["Horde"] = "Hordenova-Khazmodan",
-			},
-			["Hyjal"] = {
-				["Alliance"] = "Novadepot-Hyjal ",
-				["Horde"] = "Hordenova-Hyjal",
-			},
-			["Ysondre"] = {
-				["Alliance"] = "Novadepot-Ysondre ",
-				["Horde"] = "Hordenova-Ysondre",
-			},
-			["Elune"] = {
-				["Alliance"] = "Novadepot-Elune",
-				["Horde"] = "Hordenova-Elune",
-			},
-			["Varimathras"] = {
-				["Alliance"] = "Novadepot-Elune",
-				["Horde"] = "Hordenova-Elune",
-			},
-			["Dalaran"] = {
-				["Alliance"] = "Novadepot-Dalaran",
-				["Horde"] = "Hordenova-Dalaran",
-			},
-			["Marécage de Zangar"] = {
-				["Alliance"] = "Novadepot-Dalaran",
-				["Horde"] = "Hordenova-Dalaran",
-			},
-			["Cho'gall"] = {
-				["Alliance"] = "Novadepot-Dalaran",
-				["Horde"] = "Hordenova-Dalaran",
-			},
-			["Eldre'Thalas"] = {
-				["Alliance"] = "Novadepot-Dalaran",
-				["Horde"] = "Hordenova-Dalaran",
-			},
-			["Sinstralis"] = {
-				["Alliance"] = "Novadepot-Dalaran",
-				["Horde"] = "Hordenova-Dalaran",
-			},
-			["Medivh , Suramar"] = {
-				["Alliance"] = "Novadepot-Medivh",
-				["Horde"] = "Hordenova-Medivh",
-			},
-			["Confrerie du Thorium"] = {
-				["Alliance"] = "Novadepot-Kirintor ",
-				["Horde"] = "Hordenova-Kirintor",
-			},
-			["Les Clairvoyants"] = {
-				["Alliance"] = "Novadepot-Kirintor ",
-				["Horde"] = "Hordenova-Kirintor",
-			},
-			["Les Sentinelles"] = {
-				["Alliance"] = "Novadepot-Kirintor ",
-				["Horde"] = "Hordenova-Kirintor",
-			},
-			["Kirin Tor"] = {
-				["Alliance"] = "Novadepot-Kirintor ",
-				["Horde"] = "Hordenova-Kirintor",
-			},
-			["Culte de la Rive noire"] = {
-				["Alliance"] = "Novadepot-Kirintor ",
-				["Horde"] = "Hordenova-Kirintor",
-			},
-			["La Croisade écarlate"] = {
-				["Alliance"] = "Novadepot-Kirintor ",
-				["Horde"] = "Hordenova-Kirintor",
-			},
-			["Conseil Des Ombres"] = {
-				["Alliance"] = "Novadepot-Kirintor ",
-				["Horde"] = "Hordenova-Kirintor",
-			},
-			["Chants éternels"] = {
-				["Alliance"] = "Novadepot-Vol'jin",
-				["Horde"] = "Hordenova-Chantséternels",
-			},
-			["Vol'jin"] = {
-				["Alliance"] = "Novadepot-Vol'jin",
-				["Horde"] = "Hordenova-Chantséternels",
-			},
-			["Uldaman"] = {
-				["Alliance"] = "Novadepot-Uldaman",
-				["Horde"] = "Hordenova-Uldaman",
-			},
-			["Drek'Thar"] = {
-				["Alliance"] = "Novadepot-Uldaman",
-				["Horde"] = "Hordenova-Uldaman",
-			},
-			["Krasus"] = {
-				["Alliance"] = "Novadepot-Uldaman",
-				["Horde"] = "Hordenova-Uldaman",
-			},
-			["Eitrigg"] = {
-				["Alliance"] = "Novadepot-Uldaman",
-				["Horde"] = "Hordenova-Uldaman",
-			},
-			["Illidan"] = {
-				["Alliance"] = "Novadepot-Illidan",
-				["Horde"] = "Hordenova-Illidan",
-			},
-			["Arathi"] = {
-				["Alliance"] = "Novadepot-Illidan",
-				["Horde"] = "Hordenova-Illidan",
-			},
-			["Naxxramas"] = {
-				["Alliance"] = "Novadepot-Illidan",
-				["Horde"] = "Hordenova-Illidan",
-			},
-			["Temple noir"] = {
-				["Alliance"] = "Novadepot-Illidan",
-				["Horde"] = "Hordenova-Illidan",
-			},
-			["Kael'Thas"] = {
-				["Alliance"] = "Novadepot-Kael'Thas",
-				["Horde"] = "Hordenova-Kael'Thas",
-			},
-			["Arak-arahm"] = {
-				["Alliance"] = "Novadepot-Kael'Thas",
-				["Horde"] = "Hordenova-Kael'Thas",
-			},
-			["Rashgarroth"] = {
-				["Alliance"] = "Novadepot-Kael'Thas",
-				["Horde"] = "Hordenova-Kael'Thas",
-			},
-			["Throk'Feroth"] = {
-				["Alliance"] = "Novadepot-Kael'Thas",
-				["Horde"] = "Hordenova-Kael'Thas",
-			},
-			["Sargeras"] = {
-				["Alliance"] = "Novadepot-Sargeras",
-				["Horde"] = "Hordenova-Sargeras",
-			},
-			["Garona"] = {
-				["Alliance"] = "Novadepot-Sargeras",
-				["Horde"] = "Hordenova-Sargeras",
-			},
-			["Ner’zhul"] = {
-				["Alliance"] = "Novadepot-Sargeras",
-				["Horde"] = "Hordenova-Sargeras",
+		["Profile A"] = {
+			["German"] = {
+				["Wrathbringer"] = {
+					["Horde"] = "Hordepot-Tirion",
+					["Alliance"] = "Alliancepot-Tirion",
+				},
+				["Mannoroth"] = {
+					["Horde"] = "Hordepot-Gorgonnash",
+					["Alliance"] = "Alliancepot-Gorgonnash",
+				},
+				["Tichondrius"] = {
+					["Horde"] = "Hordepot-Blackmoore",
+					["Alliance"] = "Alliancepot-Blackmoore",
+				},
+				["Theradras"] = {
+					["Horde"] = "Hordepot-Onyxia",
+					["Alliance"] = "Alliancepot-Onyxia",
+				},
+				["Alexstrasza"] = {
+					["Horde"] = "Hordepot-Alexstrasza",
+					["Alliance"] = "Alliancepot-Alexstrasza",
+				},
+				["Die ewige Wacht"] = {
+					["Horde"] = "Hordepot-Diesilbernehand",
+					["Alliance"] = "Alliancepot-Diesilbernehand",
+				},
+				["Lothar"] = {
+					["Horde"] = "Hordepot-Lothar",
+					["Alliance"] = "Alliancepot-Lothar",
+				},
+				["Mug'thol"] = {
+					["Horde"] = "Hordepot-Onyxia",
+					["Alliance"] = "Alliancepot-Onyxia",
+				},
+				["Kil'jaeden"] = {
+					["Horde"] = "Hordepot-Anetheron",
+					["Alliance"] = "Alliancepot-Anetheron",
+				},
+				["Die Nachtwache"] = {
+					["Horde"] = "Hordepot-Zirkeldescenarius",
+					["Alliance"] = "Alliancepot-Zirkeldescenarius",
+				},
+				["Dalvengyr"] = {
+					["Horde"] = "Hordepot-Aman'thul",
+					["Alliance"] = "Alliancepot-Aman'thul ",
+				},
+				["Frostwolf"] = {
+					["Horde"] = "Hordepot-Frostwolf",
+					["Alliance"] = "Alliancepot-Frostwolf",
+				},
+				["Anub'arak"] = {
+					["Horde"] = "Hordepot-Aman'thul",
+					["Alliance"] = "Alliancepot-Aman'thul ",
+				},
+				["Echsenkessel"] = {
+					["Horde"] = "Hordepot-Blackhand",
+					["Alliance"] = "Alliancepot-Blackhand",
+				},
+				["Alleria"] = {
+					["Horde"] = "Hordepot-Rexxar",
+					["Alliance"] = "Alliancepot-Rexxar",
+				},
+				["Taerar"] = {
+					["Horde"] = "Hordepot-Blackhand",
+					["Alliance"] = "Alliancepot-Blackhand",
+				},
+				["Das Konsortium"] = {
+					["Horde"] = "Hordepot-Diesilbernehand",
+					["Alliance"] = "Alliancepot-Diesilbernehand",
+				},
+				["Gilneas"] = {
+					["Horde"] = "Hordepot-Gorgonnash",
+					["Alliance"] = "Alliancepot-Gorgonnash",
+				},
+				["Perenolde"] = {
+					["Horde"] = "Hordepot-Garrosh",
+					["Alliance"] = "Alliancepot-Garrosh",
+				},
+				["Aegwynn"] = {
+					["Horde"] = "Hordepot-Aegwynn",
+					["Alliance"] = "Alliancepot-Aegwynn",
+				},
+				["Teldrassil"] = {
+					["Horde"] = "Hordepot-Garrosh",
+					["Alliance"] = "Alliancepot-Garrosh",
+				},
+				["Tirion"] = {
+					["Horde"] = "Hordepot-Tirion",
+					["Alliance"] = "Alliancepot-Tirion",
+				},
+				["Durotan"] = {
+					["Horde"] = "Hordepot-Tirion",
+					["Alliance"] = "Alliancepot-Tirion",
+				},
+				["Blackhand"] = {
+					["Horde"] = "Hordepot-Blackhand",
+					["Alliance"] = "Alliancepot-Blackhand",
+				},
+				["Gorgonnash"] = {
+					["Horde"] = "Hordepot-Gorgonnash",
+					["Alliance"] = "Alliancepot-Gorgonnash",
+				},
+				["Destromath"] = {
+					["Horde"] = "Hordepot-Gorgonnash",
+					["Alliance"] = "Alliancepot-Gorgonnash",
+				},
+				["Ambossar"] = {
+					["Horde"] = "Hordepot-Ambossar",
+					["Alliance"] = "Alliancepot-Ambossar",
+				},
+				["Shattrath"] = {
+					["Horde"] = "Hordepot-Garrosh",
+					["Alliance"] = "Alliancepot-Garrosh",
+				},
+				["Der Mithrilorden"] = {
+					["Horde"] = "Hordepot-Zirkeldescenarius",
+					["Alliance"] = "Alliancepot-Zirkeldescenarius",
+				},
+				["Malorne"] = {
+					["Horde"] = "Hordepot-Ysera",
+					["Alliance"] = "Alliancepot-Ysera",
+				},
+				["Un'Goro"] = {
+					["Horde"] = "Hordepot-Area52",
+					["Alliance"] = "Alliancepot-Area52",
+				},
+				["Madmortem"] = {
+					["Horde"] = "Hordepot-Alexstrasza",
+					["Alliance"] = "Alliancepot-Alexstrasza",
+				},
+				["Nethersturm"] = {
+					["Horde"] = "Hordepot-Alexstrasza",
+					["Alliance"] = "Alliancepot-Alexstrasza",
+				},
+				["Eredar"] = {
+					["Horde"] = "Hordepot-Eredar",
+					["Alliance"] = "Alliancepot-Eredar",
+				},
+				["Malfurion"] = {
+					["Horde"] = "Hordepot-Malfurion",
+					["Alliance"] = "Alliancepot-Malfurion",
+				},
+				["Kargath"] = {
+					["Horde"] = "Hordepot-Ambossar",
+					["Alliance"] = "Alliancepot-Ambossar",
+				},
+				["Sen'jin"] = {
+					["Horde"] = "Hordepot-Area52",
+					["Alliance"] = "Alliancepot-Area52",
+				},
+				["Der abyssische Rat"] = {
+					["Horde"] = "Hordepot-Diesilbernehand",
+					["Alliance"] = "Alliancepot-Diesilbernehand",
+				},
+				["Der Rat von Dalaran"] = {
+					["Horde"] = "Hordepot-Zirkeldescenarius",
+					["Alliance"] = "Alliancepot-Zirkeldescenarius",
+				},
+				["Krag'jin"] = {
+					["Horde"] = "Hordepot-Lothar",
+					["Alliance"] = "Alliancepot-Lothar",
+				},
+				["Die Aldor"] = {
+					["Horde"] = "Hordepot-Diealdor",
+					["Alliance"] = "Alliancepot-Diealdor",
+				},
+				["Lordaeron"] = {
+					["Horde"] = "Hordepot-Blackmoore",
+					["Alliance"] = "Alliancepot-Blackmoore",
+				},
+				["Vek'lor"] = {
+					["Horde"] = "Hordepot-Tirion",
+					["Alliance"] = "Alliancepot-Tirion",
+				},
+				["Zuluhed"] = {
+					["Horde"] = "Hordepot-Aman'thul",
+					["Alliance"] = "Alliancepot-Aman'thul ",
+				},
+				["Onyxia"] = {
+					["Horde"] = "Hordepot-Onyxia",
+					["Alliance"] = "Alliancepot-Onyxia",
+				},
+				["Frostmourne"] = {
+					["Horde"] = "Hordepot-Aman'thul",
+					["Alliance"] = "Alliancepot-Aman'thul ",
+				},
+				["Nozdormu"] = {
+					["Horde"] = "Hordepot-Garrosh",
+					["Alliance"] = "Alliancepot-Garrosh",
+				},
+				["Arthas"] = {
+					["Horde"] = "Hordepot-Tirion",
+					["Alliance"] = "Alliancepot-Tirion",
+				},
+				["Azshara"] = {
+					["Horde"] = "Hordepot-Lothar",
+					["Alliance"] = "Alliancepot-Lothar",
+				},
+				["Rexxar"] = {
+					["Horde"] = "Hordepot-Rexxar",
+					["Alliance"] = "Alliancepot-Rexxar",
+				},
+				["Antonidas"] = {
+					["Horde"] = "Hordepot-Antonidas",
+					["Alliance"] = "Alliancepot-Antonidas",
+				},
+				["Blackrock"] = {
+					["Horde"] = "Hordepot-Blackrock",
+					["Alliance"] = "Alliancepot-Blackrock",
+				},
+				["Todeswache"] = {
+					["Horde"] = "Hordepot-Zirkeldescenarius",
+					["Alliance"] = "Alliancepot-Zirkeldescenarius",
+				},
+				["Norgannon"] = {
+					["Horde"] = "Hordepot-DunMorogh",
+					["Alliance"] = "Alliancepot-DunMorogh",
+				},
+				["Das Syndikat"] = {
+					["Horde"] = "Hordepot-Diesilbernehand",
+					["Alliance"] = "Alliancepot-Diesilbernehand",
+				},
+				["Malygos"] = {
+					["Horde"] = "Hordepot-Malfurion",
+					["Alliance"] = "Alliancepot-Malfurion",
+				},
+				["Festung der Stürme"] = {
+					["Horde"] = "Hordepot-Anetheron",
+					["Alliance"] = "Alliancepot-Anetheron",
+				},
+				["Anetheron"] = {
+					["Horde"] = "Hordepot-Anetheron",
+					["Alliance"] = "Alliancepot-Anetheron",
+				},
+				["Garrosh"] = {
+					["Horde"] = "Hordepot-Garrosh",
+					["Alliance"] = "Alliancepot-Garrosh",
+				},
+				["Terrordar"] = {
+					["Horde"] = "Hordepot-Onyxia",
+					["Alliance"] = "Alliancepot-Onyxia",
+				},
+				["Area 52"] = {
+					["Horde"] = "Hordepot-Area52",
+					["Alliance"] = "Alliancepot-Area52",
+				},
+				["Dethecus"] = {
+					["Horde"] = "Hordepot-Onyxia",
+					["Alliance"] = "Alliancepot-Onyxia",
+				},
+				["Kel'Thuzad"] = {
+					["Horde"] = "Hordepot-Tirion",
+					["Alliance"] = "Alliancepot-Tirion",
+				},
+				["Thrall"] = {
+					["Horde"] = "Hordepot-Thrall",
+					["Alliance"] = "Alliancepot-Thrall",
+				},
+				["Nera'thor"] = {
+					["Horde"] = "Hordepot-Gorgonnash",
+					["Alliance"] = "Alliancepot-Gorgonnash",
+				},
+				["Gul'dan"] = {
+					["Horde"] = "Hordepot-Anetheron",
+					["Alliance"] = "Alliancepot-Anetheron",
+				},
+				["Rajaxx"] = {
+					["Horde"] = "Hordepot-Anetheron",
+					["Alliance"] = "Alliancepot-Anetheron",
+				},
+				["Nathrezim"] = {
+					["Horde"] = "Hordepot-Anetheron",
+					["Alliance"] = "Alliancepot-Anetheron",
+				},
+				["Die Silberne Hand"] = {
+					["Horde"] = "Hordepot-Diesilbernehand",
+					["Alliance"] = "Alliancepot-Diesilbernehand",
+				},
+				["Zirkel des Cenarius"] = {
+					["Horde"] = "Hordepot-Zirkeldescenarius",
+					["Alliance"] = "Alliancepot-Zirkeldescenarius",
+				},
+				["Blackmoore"] = {
+					["Horde"] = "Hordepot-Blackmoore",
+					["Alliance"] = "Alliancepot-Blackmoore",
+				},
+				["Forscheliga"] = {
+					["Horde"] = "Hordepot-Zirkeldescenarius",
+					["Alliance"] = "Alliancepot-Zirkeldescenarius",
+				},
+				["Mal'Ganis"] = {
+					["Horde"] = "Hordepot-Blackhand",
+					["Alliance"] = "Alliancepot-Blackhand",
+				},
+				["Die Arguswacht"] = {
+					["Horde"] = "Hordepot-Diesilbernehand",
+					["Alliance"] = "Alliancepot-Diesilbernehand",
+				},
+				["Arygos"] = {
+					["Horde"] = "Hordepot-Khaz'goroth",
+					["Alliance"] = "Alliancepot-Khaz'goroth",
+				},
+				["Die Todeskrallen"] = {
+					["Horde"] = "Hordepot-Diesilbernehand",
+					["Alliance"] = "Alliancepot-Diesilbernehand",
+				},
+				["Kult der Verdammten"] = {
+					["Horde"] = "Hordepot-Diesilbernehand",
+					["Alliance"] = "Alliancepot-Diesilbernehand",
+				},
+				["Dun Morogh"] = {
+					["Horde"] = "Hordepot-DunMorogh",
+					["Alliance"] = "Alliancepot-DunMorogh",
+				},
+				["Baelgun"] = {
+					["Horde"] = "Hordepot-Lothar",
+					["Alliance"] = "Alliancepot-Lothar",
+				},
+				["Nefarian"] = {
+					["Horde"] = "Hordepot-Gorgonnash",
+					["Alliance"] = "Alliancepot-Gorgonnash",
+				},
+				["Blutkessel"] = {
+					["Horde"] = "Hordepot-Tirion",
+					["Alliance"] = "Alliancepot-Tirion",
+				},
+				["Khaz'goroth"] = {
+					["Horde"] = "Hordepot-Khaz'goroth",
+					["Alliance"] = "Alliancepot-Khaz'goroth",
+				},
+				["Nazjatar"] = {
+					["Horde"] = "Hordepot-Aman'thul",
+					["Alliance"] = "Alliancepot-Aman'thul ",
+				},
+				["Aman'Thul"] = {
+					["Horde"] = "Hordepot-Aman'thul",
+					["Alliance"] = "Alliancepot-Aman'thul ",
+				},
+				["Proudmoore"] = {
+					["Horde"] = "Hordepot-Alexstrasza",
+					["Alliance"] = "Alliancepot-Alexstrasza",
+				},
+				["Ysera"] = {
+					["Horde"] = "Hordepot-Ysera",
+					["Alliance"] = "Alliancepot-Ysera",
+				},
+				["Ulduar"] = {
+					["Horde"] = "Hordepot-Gorgonnash",
+					["Alliance"] = "Alliancepot-Gorgonnash",
+				},
+			},
+			["Spanish"] = {
+				["Los Errantes"] = {
+					["Horde"] = "Hordepot-Tyrande",
+					["Alliance"] = "Alliancepot-Tyrande",
+				},
+				["Exodar"] = {
+					["Horde"] = "Hordepot-Minahonda",
+					["Alliance"] = "Alliancepot-Minahonda",
+				},
+				["Sanguino"] = {
+					["Horde"] = "Hordepot-Sanguino",
+					["Alliance"] = "Alliancepot-Sanguino",
+				},
+				["Zul'jin"] = {
+					["Horde"] = "Hordepot-Sanguino",
+					["Alliance"] = "Alliancepot-Sanguino",
+				},
+				["Minahonda"] = {
+					["Horde"] = "Hordepot-Minahonda",
+					["Alliance"] = "Alliancepot-Minahonda",
+				},
+				["Uldum"] = {
+					["Horde"] = "Hordepot-Sanguino",
+					["Alliance"] = "Alliancepot-Sanguino",
+				},
+				["Colinas Pardas"] = {
+					["Horde"] = "Hordepot-Tyrande",
+					["Alliance"] = "Alliancepot-Tyrande",
+				},
+				["Shen'dralar"] = {
+					["Horde"] = "Hordepot-Sanguino",
+					["Alliance"] = "Alliancepot-Sanguino",
+				},
+				["Dun Modr"] = {
+					["Horde"] = "Hordepot-DunModr",
+					["Alliance"] = "Alliancepot-DunModr",
+				},
+				["Tyrande"] = {
+					["Horde"] = "Hordepot-Tyrande",
+					["Alliance"] = "Alliancepot-Tyrande",
+				},
+				["C'thun"] = {
+					["Horde"] = "Hordepot-C'thun",
+					["Alliance"] = "Alliancepot-C'thun ",
+				},
+			},
+			["Italian"] = {
+				["Pozzo dell'Eternità"] = {
+					["Horde"] = "Hordepot-Pozzo dell'Eternità",
+					["Alliance"] = "Alliancepot-Pozzo dell'Eternità",
+				},
+				["Nemesis"] = {
+					["Horde"] = "Hordepot-Nemesis",
+					["Alliance"] = "Alliancepot-Nemesis",
+				},
+			},
+			["French"] = {
+				["Conseil Des Ombres"] = {
+					["Horde"] = "Hordepot-Kirintor",
+					["Alliance"] = "Alliancepot-Kirintor ",
+				},
+				["Sinstralis"] = {
+					["Horde"] = "Hordepot-Dalaran",
+					["Alliance"] = "Alliancepot-Dalaran",
+				},
+				["Chants éternels"] = {
+					["Horde"] = "Hordenova-Chantséternels",
+					["Alliance"] = "Alliancepot-Vol'jin",
+				},
+				["Hyjal"] = {
+					["Horde"] = "Hordepot-Hyjal",
+					["Alliance"] = "Alliancepot-Hyjal ",
+				},
+				["Naxxramas"] = {
+					["Horde"] = "Hordepot-Illidan",
+					["Alliance"] = "Alliancepot-Illidan",
+				},
+				["Varimathras"] = {
+					["Horde"] = "Hordepot-Elune",
+					["Alliance"] = "Alliancepot-Elune",
+				},
+				["Krasus"] = {
+					["Horde"] = "Hordepot-Uldaman",
+					["Alliance"] = "Alliancepot-Uldaman",
+				},
+				["Arathi"] = {
+					["Horde"] = "Hordepot-Illidan",
+					["Alliance"] = "Alliancepot-Illidan",
+				},
+				["Eitrigg"] = {
+					["Horde"] = "Hordepot-Uldaman",
+					["Alliance"] = "Alliancepot-Uldaman",
+				},
+				["Kirin Tor"] = {
+					["Horde"] = "Hordepot-Kirintor",
+					["Alliance"] = "Alliancepot-Kirintor ",
+				},
+				["Garona"] = {
+					["Horde"] = "Hordepot-Sargeras",
+					["Alliance"] = "Alliancepot-Sargeras",
+				},
+				["Vol'jin"] = {
+					["Horde"] = "Hordenova-Chantséternels",
+					["Alliance"] = "Alliancepot-Vol'jin",
+				},
+				["Cho'gall"] = {
+					["Horde"] = "Hordepot-Dalaran",
+					["Alliance"] = "Alliancepot-Dalaran",
+				},
+				["Ysondre"] = {
+					["Horde"] = "Hordepot-Ysondre",
+					["Alliance"] = "Alliancepot-Ysondre ",
+				},
+				["Archimonde"] = {
+					["Horde"] = "Hordepot-Archimonde",
+					["Alliance"] = "Alliancepot-Archimonde ",
+				},
+				["Elune"] = {
+					["Horde"] = "Hordepot-Elune",
+					["Alliance"] = "Alliancepot-Elune",
+				},
+				["Les Sentinelles"] = {
+					["Horde"] = "Hordepot-Kirintor",
+					["Alliance"] = "Alliancepot-Kirintor ",
+				},
+				["Les Clairvoyants"] = {
+					["Horde"] = "Hordepot-Kirintor",
+					["Alliance"] = "Alliancepot-Kirintor ",
+				},
+				["Uldaman"] = {
+					["Horde"] = "Hordepot-Uldaman",
+					["Alliance"] = "Alliancepot-Uldaman",
+				},
+				["Eldre'Thalas"] = {
+					["Horde"] = "Hordepot-Dalaran",
+					["Alliance"] = "Alliancepot-Dalaran",
+				},
+				["Dalaran"] = {
+					["Horde"] = "Hordepot-Dalaran",
+					["Alliance"] = "Alliancepot-Dalaran",
+				},
+				["Sargeras"] = {
+					["Horde"] = "Hordepot-Sargeras",
+					["Alliance"] = "Alliancepot-Sargeras",
+				},
+				["Kael'Thas"] = {
+					["Horde"] = "Hordepot-Kael'Thas",
+					["Alliance"] = "Alliancepot-Kael'Thas",
+				},
+				["Khaz Modan"] = {
+					["Horde"] = "Hordepot-Khazmodan",
+					["Alliance"] = "Alliancepot-Khazmodan ",
+				},
+				["Rashgarroth"] = {
+					["Horde"] = "Hordepot-Kael'Thas",
+					["Alliance"] = "Alliancepot-Kael'Thas",
+				},
+				["Ner’zhul"] = {
+					["Horde"] = "Hordepot-Sargeras",
+					["Alliance"] = "Alliancepot-Sargeras",
+				},
+				["Throk'Feroth"] = {
+					["Horde"] = "Hordepot-Kael'Thas",
+					["Alliance"] = "Alliancepot-Kael'Thas",
+				},
+				["Arak-arahm"] = {
+					["Horde"] = "Hordepot-Kael'Thas",
+					["Alliance"] = "Alliancepot-Kael'Thas",
+				},
+				["Temple noir"] = {
+					["Horde"] = "Hordepot-Illidan",
+					["Alliance"] = "Alliancepot-Illidan",
+				},
+				["La Croisade écarlate"] = {
+					["Horde"] = "Hordepot-Kirintor",
+					["Alliance"] = "Alliancepot-Kirintor ",
+				},
+				["Illidan"] = {
+					["Horde"] = "Hordepot-Illidan",
+					["Alliance"] = "Alliancepot-Illidan",
+				},
+				["Drek'Thar"] = {
+					["Horde"] = "Hordepot-Uldaman",
+					["Alliance"] = "Alliancepot-Uldaman",
+				},
+				["Marécage de Zangar"] = {
+					["Horde"] = "Hordepot-Dalaran",
+					["Alliance"] = "Alliancepot-Dalaran",
+				},
+				["Culte de la Rive noire"] = {
+					["Horde"] = "Hordepot-Kirintor",
+					["Alliance"] = "Alliancepot-Kirintor ",
+				},
+				["Confrerie du Thorium"] = {
+					["Horde"] = "Hordepot-Kirintor",
+					["Alliance"] = "Alliancepot-Kirintor ",
+				},
+				["Medivh , Suramar"] = {
+					["Horde"] = "Hordepot-Medivh",
+					["Alliance"] = "Alliancepot-Medivh",
+				},
+			},
+			["English"] = {
+				["The Venture Co"] = {
+					["Horde"] = "Hordepot-Defiasbrotherhood",
+					["Alliance"] = "Alliancepot-Defiasbrotherhood",
+				},
+				["Nordrassil"] = {
+					["Horde"] = "Hordepot-Nordrassil",
+					["Alliance"] = "Alliancepot-Nordrassil",
+				},
+				["Silvermoon"] = {
+					["Horde"] = "Hordepot-Silvermoon",
+					["Alliance"] = "Alliancepot-Silvermoon",
+				},
+				["Kilrogg"] = {
+					["Horde"] = "Hordepot-Arathor",
+					["Alliance"] = "Alliancepot-Arathor",
+				},
+				["Ahn'Qiraj"] = {
+					["Horde"] = "Hordepot-Ahn'qiraj",
+					["Alliance"] = "Alliancepot-Ahn'qiraj",
+				},
+				["Alonsus"] = {
+					["Horde"] = "Hordepot-Alonsus",
+					["Alliance"] = "Alliancepot-Alonsus",
+				},
+				["Anachronos"] = {
+					["Horde"] = "Hordepot-Alonsus",
+					["Alliance"] = "Alliancepot-Alonsus",
+				},
+				["Darkspear"] = {
+					["Horde"] = "Hordepot-Darkspear",
+					["Alliance"] = "Alliancepot-Darkspear",
+				},
+				["Skullcrusher"] = {
+					["Horde"] = "Hordepot-Al'akir",
+					["Alliance"] = "Alliancepot-Al'akir",
+				},
+				["Terokkar"] = {
+					["Horde"] = "Hordepot-Darkspear",
+					["Alliance"] = "Alliancepot-Darkspear",
+				},
+				["Aszune"] = {
+					["Horde"] = "Hordepot-Aszune",
+					["Alliance"] = "Alliancepot-Aszune",
+				},
+				["Aggra(português)"] = {
+					["Horde"] = "Hordepot-Frostmane",
+					["Alliance"] = "Alliancepot-Frostmane",
+				},
+				["Darksorrow"] = {
+					["Horde"] = "Hordepot-Darksorrow",
+					["Alliance"] = "Alliancepot-Darksorrow",
+				},
+				["Jaedenar"] = {
+					["Horde"] = "Hordepot-Sylvanas",
+					["Alliance"] = "Alliancepot-Sylvanas",
+				},
+				["Runetotem"] = {
+					["Horde"] = "Hordepot-Arathor",
+					["Alliance"] = "Alliancepot-Arathor",
+				},
+				["Xavius"] = {
+					["Horde"] = "Hordepot-Al'akir",
+					["Alliance"] = "Alliancepot-Al'akir",
+				},
+				["Ravencrest"] = {
+					["Horde"] = "Hordepot-Ravencrest",
+					["Alliance"] = "Alliancepot-Ravencrest",
+				},
+				["Draenor"] = {
+					["Horde"] = "Hordepot-Draenor",
+					["Alliance"] = "Alliancepot-Draenor",
+				},
+				["Vek'Nilash"] = {
+					["Horde"] = "Hordepot-Aeriepeak",
+					["Alliance"] = "Alliancepot-Aeriepeak",
+				},
+				["Deathwing"] = {
+					["Horde"] = "Hordepot-Themaelstrom",
+					["Alliance"] = "Alliancepot-Themaelstrom",
+				},
+				["Agamaggan"] = {
+					["Horde"] = "Hordepot-Emeriss",
+					["Alliance"] = "Alliancepot-Emeriss",
+				},
+				["Twilight's Hammer"] = {
+					["Horde"] = "Hordepot-Emeriss",
+					["Alliance"] = "Alliancepot-Emeriss",
+				},
+				["Aerie Peak"] = {
+					["Horde"] = "Hordepot-Aeriepeak",
+					["Alliance"] = "Alliancepot-Aeriepeak",
+				},
+				["Nagrand"] = {
+					["Horde"] = "Hordepot-Arathor",
+					["Alliance"] = "Alliancepot-Arathor",
+				},
+				["Vashj"] = {
+					["Horde"] = "Hordepot-Stormreaver",
+					["Alliance"] = "Alliancepot-Stormreaver",
+				},
+				["Ragnaros"] = {
+					["Horde"] = "Hordepot-Ragnaros",
+					["Alliance"] = "Alliancepot-Ragnaros",
+				},
+				["Boulderfist"] = {
+					["Horde"] = "Hordepot-Ahn'qiraj",
+					["Alliance"] = "Alliancepot-Ahn'qiraj",
+				},
+				["Al'Akir"] = {
+					["Horde"] = "Hordepot-Al'akir",
+					["Alliance"] = "Alliancepot-Al'akir",
+				},
+				["Auchindoun"] = {
+					["Horde"] = "Hordepot-Sylvanas",
+					["Alliance"] = "Alliancepot-Sylvanas",
+				},
+				["Balnazzar"] = {
+					["Horde"] = "Hordepot-Ahn'qiraj",
+					["Alliance"] = "Alliancepot-Ahn'qiraj",
+				},
+				["Burning Steppes"] = {
+					["Horde"] = "Hordepot-Darkspear",
+					["Alliance"] = "Alliancepot-Darkspear",
+				},
+				["Stormrage"] = {
+					["Horde"] = "Hordepot-Stormrage",
+					["Alliance"] = "Alliancepot-Stormrage",
+				},
+				["Quel'Thalas"] = {
+					["Horde"] = "Hordepot-Quel'thalas",
+					["Alliance"] = "Alliancepot-Quel'thalas",
+				},
+				["Haomarush"] = {
+					["Horde"] = "Hordepot-Stormreaver",
+					["Alliance"] = "Alliancepot-Stormreaver",
+				},
+				["Terenas"] = {
+					["Horde"] = "Hordepot-Emeralddream",
+					["Alliance"] = "Alliancepot-Emeralddream",
+				},
+				["Eonar"] = {
+					["Horde"] = "Hordepot-Aeriepeak",
+					["Alliance"] = "Alliancepot-Aeriepeak",
+				},
+				["Chamber of Aspects"] = {
+					["Horde"] = "Hordepot-Chamberofaspects",
+					["Alliance"] = "Alliancepot-Chamberofaspects",
+				},
+				["Steamwheedle Cartel"] = {
+					["Horde"] = "Hordepot-Steamwheedlecartel",
+					["Alliance"] = "Alliancepot-Steamwheedlecartel",
+				},
+				["Neptulon"] = {
+					["Horde"] = "Hordepot-Darksorrow",
+					["Alliance"] = "Alliancepot-Darksorrow",
+				},
+				["Thunderhorn"] = {
+					["Horde"] = "Hordepot-Thunderhorn",
+					["Alliance"] = "Alliancepot-Thunderhorn",
+				},
+				["Outland"] = {
+					["Horde"] = "Hordepot-Outland",
+					["Alliance"] = "Alliancepot-Outland",
+				},
+				["Burning Legion"] = {
+					["Horde"] = "Hordepot-Al'akir",
+					["Alliance"] = "Alliancepot-Al'akir",
+				},
+				["Turalyon"] = {
+					["Horde"] = "Hordepot-Doomhammer",
+					["Alliance"] = "Alliancepot-Doomhammer",
+				},
+				["Doomhammer"] = {
+					["Horde"] = "Hordepot-Doomhammer",
+					["Alliance"] = "Alliancepot-Doomhammer",
+				},
+				["Scarshield Legion"] = {
+					["Horde"] = "Hordepot-Defiasbrotherhood",
+					["Alliance"] = "Alliancepot-Defiasbrotherhood",
+				},
+				["Magtheridon"] = {
+					["Horde"] = "Hordepot-Magtheridon",
+					["Alliance"] = "Alliancepot-Magtheridon",
+				},
+				["Daggerspine"] = {
+					["Horde"] = "Hordepot-Ahn'qiraj",
+					["Alliance"] = "Alliancepot-Ahn'qiraj",
+				},
+				["Azjol-Nerub"] = {
+					["Horde"] = "Hordepot-Quel'thalas",
+					["Alliance"] = "Alliancepot-Quel'thalas",
+				},
+				["Crushridge"] = {
+					["Horde"] = "Hordepot-Emeriss",
+					["Alliance"] = "Alliancepot-Emeriss",
+				},
+				["Moonglade"] = {
+					["Horde"] = "Hordepot-Steamwheedlecartel",
+					["Alliance"] = "Alliancepot-Steamwheedlecartel",
+				},
+				["Spinebreaker"] = {
+					["Horde"] = "Hordepot-Stormreaver",
+					["Alliance"] = "Alliancepot-Stormreaver",
+				},
+				["Aggramar"] = {
+					["Horde"] = "Hordepot-Aggramar",
+					["Alliance"] = "Alliancepot-Aggramar",
+				},
+				["Genjuros"] = {
+					["Horde"] = "Hordepot-Darksorrow",
+					["Alliance"] = "Alliancepot-Darksorrow",
+				},
+				["Saurfang"] = {
+					["Horde"] = "Hordepot-Darkspear",
+					["Alliance"] = "Alliancepot-Darkspear",
+				},
+				["Frostwhisper"] = {
+					["Horde"] = "Hordepot-Darksorrow",
+					["Alliance"] = "Alliancepot-Darksorrow",
+				},
+				["Shattered Halls"] = {
+					["Horde"] = "Hordepot-Ahn'qiraj",
+					["Alliance"] = "Alliancepot-Ahn'qiraj",
+				},
+				["Dentarg"] = {
+					["Horde"] = "Hordepot-TarrenMill",
+					["Alliance"] = "Alliancepot-TarrenMill",
+				},
+				["Twisting Nether"] = {
+					["Horde"] = "Hordepot-TwistingNether",
+					["Alliance"] = "Alliancepot-Twisting Nether",
+				},
+				["Shadowsong"] = {
+					["Horde"] = "Hordepot-Aszune",
+					["Alliance"] = "Alliancepot-Aszune",
+				},
+				["Kazzak"] = {
+					["Horde"] = "Hordepot-Kazzak",
+					["Alliance"] = "Alliancepot-Kazzak",
+				},
+				["Sporeggar"] = {
+					["Horde"] = "Hordepot-Defiasbrotherhood",
+					["Alliance"] = "Alliancepot-Defiasbrotherhood",
+				},
+				["Bladefist"] = {
+					["Horde"] = "Hordepot-Darksorrow",
+					["Alliance"] = "Alliancepot-Darksorrow",
+				},
+				["Bloodhoof"] = {
+					["Horde"] = "Hordepot-Khadgar",
+					["Alliance"] = "Alliancepot-Khadgar",
+				},
+				["Dragonmaw"] = {
+					["Horde"] = "Hordepot-Stormreaver",
+					["Alliance"] = "Alliancepot-Stormreaver",
+				},
+				["Drak'Thul"] = {
+					["Horde"] = "Hordepot-Drak'Thul",
+					["Alliance"] = "Alliancepot-Drak'Thul",
+				},
+				["Dunemaul"] = {
+					["Horde"] = "Hordepot-Sylvanas",
+					["Alliance"] = "Alliancepot-Sylvanas",
+				},
+				["Defias Brotherhood"] = {
+					["Horde"] = "Hordepot-Defiasbrotherhood",
+					["Alliance"] = "Alliancepot-Defiasbrotherhood",
+				},
+				["Bloodscalp"] = {
+					["Horde"] = "Hordepot-Emeriss",
+					["Alliance"] = "Alliancepot-Emeriss",
+				},
+				["Tarren Mill"] = {
+					["Horde"] = "Hordepot-TarrenMill",
+					["Alliance"] = "Alliancepot-TarrenMill",
+				},
+				["Burning Blade"] = {
+					["Horde"] = "Hordepot-Drak'Thul",
+					["Alliance"] = "Alliancepot-Drak'Thul",
+				},
+				["Laughing Skull"] = {
+					["Horde"] = "Hordepot-Ahn'qiraj",
+					["Alliance"] = "Alliancepot-Ahn'qiraj",
+				},
+				["Lightbringer"] = {
+					["Horde"] = "Hordepot-Lightbringer",
+					["Alliance"] = "Alliancepot-Lightbringer",
+				},
+				["Dragonblight"] = {
+					["Horde"] = "Hordepot-Themaelstrom",
+					["Alliance"] = "Alliancepot-Themaelstrom",
+				},
+				["Frostmane"] = {
+					["Horde"] = "Hordepot-Frostmane",
+					["Alliance"] = "Alliancepot-Frostmane",
+				},
+				["Emerald Dream"] = {
+					["Horde"] = "Hordepot-Emeralddream",
+					["Alliance"] = "Alliancepot-Emeralddream",
+				},
+				["Kor'gall"] = {
+					["Horde"] = "Hordepot-Darkspear",
+					["Alliance"] = "Alliancepot-Darkspear",
+				},
+				["The Sha'Tar"] = {
+					["Horde"] = "Hordepot-Steamwheedlecartel",
+					["Alliance"] = "Alliancepot-Steamwheedlecartel",
+				},
+				["Mazrigos"] = {
+					["Horde"] = "Hordepot-Lightbringer",
+					["Alliance"] = "Alliancepot-Lightbringer",
+				},
+				["Talnivarr"] = {
+					["Horde"] = "Hordepot-Ahn'qiraj",
+					["Alliance"] = "Alliancepot-Ahn'qiraj",
+				},
+				["Wildhammer"] = {
+					["Horde"] = "Hordepot-Thunderhorn",
+					["Alliance"] = "Alliancepot-Thunderhorn",
+				},
+				["Sylvanas"] = {
+					["Horde"] = "Hordepot-Sylvanas",
+					["Alliance"] = "Alliancepot-Sylvanas",
+				},
+				["The Maelstrom"] = {
+					["Horde"] = "Hordepot-Themaelstrom",
+					["Alliance"] = "Alliancepot-Themaelstrom",
+				},
+				["Hellfire"] = {
+					["Horde"] = "Hordepot-Arathor",
+					["Alliance"] = "Alliancepot-Arathor",
+				},
+				["Azuremyst"] = {
+					["Horde"] = "Hordepot-Stormrage",
+					["Alliance"] = "Alliancepot-Stormrage",
+				},
+				["Darkmoon Faire"] = {
+					["Horde"] = "Hordepot-Defiasbrotherhood",
+					["Alliance"] = "Alliancepot-Defiasbrotherhood",
+				},
+				["Zenedar"] = {
+					["Horde"] = "Hordepot-Darksorrow",
+					["Alliance"] = "Alliancepot-Darksorrow",
+				},
+				["Ghostlands"] = {
+					["Horde"] = "Hordepot-Themaelstrom",
+					["Alliance"] = "Alliancepot-Themaelstrom",
+				},
+				["Blade's Edge"] = {
+					["Horde"] = "Hordepot-Aeriepeak",
+					["Alliance"] = "Alliancepot-Aeriepeak",
+				},
+				["Bronze Dragonflight"] = {
+					["Horde"] = "Hordepot-Nordrassil",
+					["Alliance"] = "Alliancepot-Nordrassil",
+				},
+				["Hellscream"] = {
+					["Horde"] = "Hordepot-Aggramar",
+					["Alliance"] = "Alliancepot-Aggramar",
+				},
+				["Stormscale"] = {
+					["Horde"] = "Hordepot-Stormscale",
+					["Alliance"] = "Alliancepot-Stormscale",
+				},
+				["Khadgar"] = {
+					["Horde"] = "Hordepot-Khadgar",
+					["Alliance"] = "Alliancepot-Khadgar",
+				},
+				["Bronzebeard"] = {
+					["Horde"] = "Hordepot-Aeriepeak",
+					["Alliance"] = "Alliancepot-Aeriepeak",
+				},
+				["Arathor"] = {
+					["Horde"] = "Hordepot-Arathor",
+					["Alliance"] = "Alliancepot-Arathor",
+				},
+				["Bloodfeather"] = {
+					["Horde"] = "Hordepot-Darkspear",
+					["Alliance"] = "Alliancepot-Darkspear",
+				},
+				["Executus"] = {
+					["Horde"] = "Hordepot-Darkspear",
+					["Alliance"] = "Alliancepot-Darkspear",
+				},
+				["Hakkar"] = {
+					["Horde"] = "Hordepot-Emeriss",
+					["Alliance"] = "Alliancepot-Emeriss",
+				},
+				["Kul Tiras"] = {
+					["Horde"] = "Hordepot-Alonsus",
+					["Alliance"] = "Alliancepot-Alonsus",
+				},
+				["Lightning's Blade"] = {
+					["Horde"] = "Hordepot-Themaelstrom",
+					["Alliance"] = "Alliancepot-Themaelstrom",
+				},
+				["Sunstrider"] = {
+					["Horde"] = "Hordepot-Ahn'qiraj",
+					["Alliance"] = "Alliancepot-Ahn'qiraj",
+				},
+				["Earthen Ring"] = {
+					["Horde"] = "Hordepot-Defiasbrotherhood",
+					["Alliance"] = "Alliancepot-Defiasbrotherhood",
+				},
+				["Emeriss"] = {
+					["Horde"] = "Hordepot-Emeriss",
+					["Alliance"] = "Alliancepot-Emeriss",
+				},
+				["Trollbane"] = {
+					["Horde"] = "Hordepot-Ahn'qiraj",
+					["Alliance"] = "Alliancepot-Ahn'qiraj",
+				},
+				["Grim Batol"] = {
+					["Horde"] = "Hordepot-Frostmane",
+					["Alliance"] = "Alliancepot-Frostmane",
+				},
+				["Stormreaver"] = {
+					["Horde"] = "Hordepot-Stormreaver",
+					["Alliance"] = "Alliancepot-Stormreaver",
+				},
+				["Karazhan"] = {
+					["Horde"] = "Hordepot-Themaelstrom",
+					["Alliance"] = "Alliancepot-Themaelstrom",
+				},
+				["Ravenholdt"] = {
+					["Horde"] = "Hordepot-Defiasbrotherhood",
+					["Alliance"] = "Alliancepot-Defiasbrotherhood",
+				},
+				["Shattered Hand"] = {
+					["Horde"] = "Hordepot-Darkspear",
+					["Alliance"] = "Alliancepot-Darkspear",
+				},
+				["Chromaggus"] = {
+					["Horde"] = "Hordepot-Ahn'qiraj",
+					["Alliance"] = "Alliancepot-Ahn'qiraj",
+				},
+				["ArgentDawn"] = {
+					["Horde"] = "Hordepot-Argentdawn",
+					["Alliance"] = "Alliancepot-Argentdawn",
+				},
 			},
 		},
 	}
 }
 
 local function BuildBankingOptionsArgs(arg_table, options)
-	for realmRegion,_ in pairs(options) do
-		if realmRegion ~= "" then 
-			arg_table[realmRegion] = {
+	for profile,_ in pairs(options) do
+		--print(profile)
+		if profile ~= "" and profile:find("Profile ") ~= nil then
+			arg_table[profile] = {
 				type = 'group',
-				name = realmRegion,
+				name = profile,
 				args = {}
 			}
 			
-			for realmName, k in pairs(options[realmRegion]) do
-				arg_table[realmRegion].args[realmName] = {
-					type = 'group',
-					name = realmName,
-					args = {
-						Alliance = {
-							type = 'input',
-							name = 'Alliance',
-							order = 1,
-							get = 'GetOption',
-							set = 'SetOption',
-						},
-						Horde = {
-							type = 'input',
-							name = 'Horde',
-							order = 2,
-							get = 'GetOption',
-							set = 'SetOption',
-						},
+			for realmRegion,_ in pairs(options[profile]) do
+				--print(realmRegion)
+				if realmRegion ~= "" then
+					arg_table[profile].args[realmRegion] = {
+						type = 'group',
+						name = realmRegion,
+						args = {}
 					}
-				}
+					
+					for realmName,_ in pairs(options[profile][realmRegion]) do
+						--print(realmName)
+						arg_table[profile].args[realmRegion].args[realmName] = {
+							type = 'group',
+							name = realmName,
+							args = {
+								Alliance = {
+									type = 'input',
+									name = 'Alliance',
+									order = 1,
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+								Horde = {
+									type = 'input',
+									name = 'Horde',
+									order = 2,
+									get = 'GetOption',
+									set = 'SetOption',
+								},
+							}
+						}
+					end
+				end
 			end
 		end
 	end
@@ -1563,13 +2599,30 @@ function nova:GetOption(info)
 	--print(#info)
 	local opt = novaOptions[info[#info]]
 	local optname=info[#info]
-	if #info == 4 then
+	if #info == 5 then
+		if novaOptions [info[#info-4]] == nil then novaOptions [info[#info-4]] = {}	end
+		if novaOptions [info[#info-4]] [info[#info-3]] == nil then novaOptions [info[#info-4]] [info[#info-3]] = {}	end
+		if novaOptions [info[#info-4]] [info[#info-3]] [info[#info-2]] == nil then novaOptions [info[#info-4]] [info[#info-3]] [info[#info-2]] = {}	end
+		if novaOptions [info[#info-4]] [info[#info-3]] [info[#info-2]] [info[#info-1]] == nil then novaOptions [info[#info-4]] [info[#info-3]] [info[#info-2]] [info[#info-1]] = {} end
+		
+		opt = novaOptions [info[#info-4]] [info[#info-3]] [info[#info-2]] [info[#info-1]] [info[#info]]
+		optname=info[#info-4].."."..info[#info-3].."."..info[#info-2].."."..info[#info-1].."."..info[#info]
+		
+	elseif #info == 4 then
 		if novaOptions [info[#info-3]] == nil then novaOptions [info[#info-3]] = {}	end
 		if novaOptions [info[#info-3]] [info[#info-2]] == nil then novaOptions [info[#info-3]] [info[#info-2]] = {}	end
 		if novaOptions [info[#info-3]] [info[#info-2]] [info[#info-1]] == nil then novaOptions [info[#info-3]] [info[#info-2]] [info[#info-1]] = {} end
 		
 		opt = novaOptions [info[#info-3]] [info[#info-2]] [info[#info-1]] [info[#info]]
 		optname=info[#info-3].."."..info[#info-2].."."..info[#info-1].."."..info[#info]
+	
+	elseif #info == 3 then
+		if novaOptions [info[#info-2]] == nil then novaOptions [info[#info-2]] = {}	end
+		if novaOptions [info[#info-2]] [info[#info-1]] == nil then novaOptions [info[#info-2]] [info[#info-1]] = {} end
+		
+		opt = novaOptions [info[#info-2]] [info[#info-1]] [info[#info]]
+		optname=info[#info-2].."."..info[#info-1].."."..info[#info]
+		
 		
 	elseif #info == 2 then
 		if novaOptions[info[#info-1]] == nil then
@@ -1587,12 +2640,27 @@ end
 
 function nova:SetOption(info, value)
 	--print(#info)
-	if #info == 4 then
+	--print(value)
+	if #info == 5 then
+		if novaOptions [info[#info-4]] == nil then novaOptions [info[#info-4]] = {}	end
+		if novaOptions [info[#info-4]] [info[#info-3]] == nil then novaOptions [info[#info-4]] [info[#info-3]] = {}	end
+		if novaOptions [info[#info-4]] [info[#info-3]] [info[#info-2]] == nil then novaOptions [info[#info-4]] [info[#info-3]] [info[#info-2]] = {}	end
+		if novaOptions [info[#info-4]] [info[#info-3]] [info[#info-2]] [info[#info-1]] == nil then novaOptions [info[#info-4]] [info[#info-3]] [info[#info-2]] [info[#info-1]] = {} end
+		
+		novaOptions [info[#info-4]] [info[#info-3]] [info[#info-2]] [info[#info-1]] [info[#info]] = value
+		
+	elseif #info == 4 then
 		if novaOptions [info[#info-3]] == nil then novaOptions [info[#info-3]] = {}	end
 		if novaOptions [info[#info-3]] [info[#info-2]] == nil then novaOptions [info[#info-3]] [info[#info-2]] = {}	end
 		if novaOptions [info[#info-3]] [info[#info-2]] [info[#info-1]] == nil then novaOptions [info[#info-3]] [info[#info-2]] [info[#info-1]] = {} end
 		
 		novaOptions [info[#info-3]] [info[#info-2]] [info[#info-1]] [info[#info]] = value
+		
+	elseif #info == 3 then
+		if novaOptions [info[#info-2]] == nil then novaOptions [info[#info-2]] = {}	end
+		if novaOptions [info[#info-2]] [info[#info-1]] == nil then novaOptions [info[#info-2]] [info[#info-1]] = {} end
+		
+		novaOptions [info[#info-2]] [info[#info-1]] [info[#info]] = value
 		
 	elseif #info == 2 then
 		if novaOptions [info[#info-1]] == nil then
@@ -1626,6 +2694,30 @@ function nova:SetOption(info, value)
 			end
 		end
 	end
+	
+	if info[#info-2] == "Banking" then
+		--print(info[#info-2])
+		--print(info[#info-1])
+		--print(info[#info])
+		
+		if novaOptions [info[#info-2]] [info[#info-1]].Profile_A == true and info[#info] == "Profile_A" then
+			--print("here1")
+			novaOptions [info[#info-2]] [info[#info-1]].Profile_B = false
+		end
+		if novaOptions [info[#info-2]] [info[#info-1]].Profile_A == false and info[#info] == "Profile_A" then
+			--print("here2")
+			novaOptions [info[#info-2]] [info[#info-1]].Profile_B = true
+		end
+		if novaOptions [info[#info-2]] [info[#info-1]].Profile_B == true and info[#info] == "Profile_B" then
+			--print("here3")
+			novaOptions [info[#info-2]] [info[#info-1]].Profile_A = false
+		end
+		if novaOptions [info[#info-2]] [info[#info-1]].Profile_B == false and info[#info] == "Profile_B" then
+			--print("here4")
+			novaOptions [info[#info-2]] [info[#info-1]].Profile_A = true
+		end
+	end
+
 end
 
 
@@ -1801,11 +2893,20 @@ local function setMailContent(index, SendMailNameEditBox, SendMailSubjectEditBox
 end
 
 local function getDepotName()
-
+	
+	local bankingProfile = "Profile A"
+	
+	if novaOptions.Banking.Profiles.Profile_A == true then
+		bankingProfile = "Profile A"
+	end
+	if novaOptions.Banking.Profiles.Profile_B == true then
+		bankingProfile = "Profile B"
+	end
+	
 	local currentRealm,_ = string.gsub(GetRealmName(), "%s+", "")
 
-	for serverRegion,_ in pairs(novaOptions.Banking) do
-		for serverName,bankingChar in pairs(novaOptions.Banking[serverRegion]) do
+	for serverRegion,_ in pairs(novaOptions.Banking[bankingProfile]) do
+		for serverName,bankingChar in pairs(novaOptions.Banking[bankingProfile][serverRegion]) do
 			
 			local serverName,_ = string.gsub(serverName, "%s+", "")
 			
@@ -3230,6 +4331,170 @@ end
 
 
 
+-----------------------------------------------------------------------------------------------------
+------------------------------------- IMPORT BANKING CHARACTERS -------------------------------------
+-----------------------------------------------------------------------------------------------------
+
+function importBankingCharacters(row)
+	------------------------
+	-- Main Frame
+	local ibcFrame = AceGUI:Create("Frame")
+	ibcFrame:SetWidth(350)
+	ibcFrame:SetHeight(670)
+	ibcFrame:SetTitle("Import Banking Characters")
+	ibcFrame:SetCallback("OnClose", function(widget) AceGUI:Release(widget) end)
+	
+	------------------------
+	-- Profile
+	local ibcGroupProfile = AceGUI:Create("InlineGroup")
+	
+	local ibcLabelProfile = AceGUI:Create("Label")
+	ibcLabelProfile:SetText("Banking Profile")
+	ibcLabelProfile:SetFont("GameFontNormalSmall",100,OUTLINE)
+	ibcLabelProfile:SetColor(1, 0.8, 0)
+	ibcLabelProfile:SetHeight(15)
+	
+	local ibcCheckboxProfileA = AceGUI:Create("CheckBox")
+	ibcCheckboxProfileA:SetType("radio")
+	ibcCheckboxProfileA:SetLabel("Profile A")
+	ibcCheckboxProfileA:SetValue(true)
+	ibcCheckboxProfileA:SetHeight(15)
+	ibcCheckboxProfileA:SetWidth(80)
+	
+	local ibcCheckboxProfileB= AceGUI:Create("CheckBox")
+	ibcCheckboxProfileB:SetType("radio")
+	ibcCheckboxProfileB:SetLabel("Profile B")
+	ibcCheckboxProfileB:SetValue(false)
+	ibcCheckboxProfileB:SetHeight(15)
+	ibcCheckboxProfileB:SetWidth(80)
+	
+	local profileSelected = "Profile A"
+	
+	ibcCheckboxProfileA:SetCallback("OnValueChanged",function(widget,event,value)
+		if value == true then
+			ibcCheckboxProfileB:SetValue(false)
+			profileSelected = "Profile A"
+		end
+	end )
+	
+	ibcCheckboxProfileB:SetCallback("OnValueChanged",function(widget,event,value)
+		if value == true then
+			ibcCheckboxProfileA:SetValue(false)
+			profileSelected = "Profile B"
+		end
+	end )
+	
+	ibcGroupProfile:SetLayout("Flow")
+	ibcGroupProfile:AddChild(ibcLabelProfile)
+	ibcGroupProfile:AddChild(ibcCheckboxProfileA)
+	ibcGroupProfile:AddChild(ibcCheckboxProfileB)
+	
+	------------------------
+	-- Faction
+	local ibcGroupFaction = AceGUI:Create("InlineGroup")
+	
+	local ibcLabelFaction = AceGUI:Create("Label")
+	ibcLabelFaction:SetText("Faction")
+	ibcLabelFaction:SetFont("GameFontNormalSmall",100,OUTLINE)
+	ibcLabelFaction:SetColor(1, 0.8, 0)
+	ibcLabelFaction:SetHeight(15)
+	
+	local ibcCheckboxAlliance = AceGUI:Create("CheckBox")
+	ibcCheckboxAlliance:SetType("radio")
+	ibcCheckboxAlliance:SetLabel("Alliance")
+	ibcCheckboxAlliance:SetValue(true)
+	ibcCheckboxAlliance:SetHeight(15)
+	ibcCheckboxAlliance:SetWidth(80)
+	
+	local ibcCheckboxHorde = AceGUI:Create("CheckBox")
+	ibcCheckboxHorde:SetType("radio")
+	ibcCheckboxHorde:SetLabel("Horde")
+	ibcCheckboxHorde:SetValue(false)
+	ibcCheckboxHorde:SetHeight(15)
+	ibcCheckboxHorde:SetWidth(80)
+	
+	local factionSelected = "Alliance"
+	
+	ibcCheckboxAlliance:SetCallback("OnValueChanged",function(widget,event,value)
+		if value == true then
+			ibcCheckboxHorde:SetValue(false)
+			factionSelected = "Alliance"
+		end
+	end )
+	
+	ibcCheckboxHorde:SetCallback("OnValueChanged",function(widget,event,value)
+		if value == true then
+			ibcCheckboxAlliance:SetValue(false)
+			factionSelected = "Horde"
+		end
+	end )
+	
+	ibcGroupFaction:SetLayout("Flow")
+	ibcGroupFaction:AddChild(ibcLabelFaction)
+	ibcGroupFaction:AddChild(ibcCheckboxAlliance)
+	ibcGroupFaction:AddChild(ibcCheckboxHorde)
+	
+	------------------------
+	-- Textbox
+	local ibcGroupInput = AceGUI:Create("InlineGroup")
+	
+	local ibcLabelInput = AceGUI:Create("Label")
+	ibcLabelInput:SetText("Input Banking Charachters")
+	ibcLabelInput:SetFont("GameFontNormalSmall",100,OUTLINE)
+	ibcLabelInput:SetColor(1, 0.8, 0)
+	ibcLabelInput:SetHeight(15)
+	
+	local ibcMEditboxInput = AceGUI:Create("MultiLineEditBox")
+	ibcMEditboxInput:SetMaxLetters(0)
+	--ibcMEditboxInput:SetFocus()
+	ibcMEditboxInput:SetWidth(280)
+	ibcMEditboxInput:SetHeight(350)
+	
+	ibcGroupInput:AddChild(ibcLabelInput)
+	ibcGroupInput:AddChild(ibcMEditboxInput)
+	
+	------------------------
+	-- Import Button
+	local ibcButtonImport = AceGUI:Create("Button")
+	ibcButtonImport:SetText("Import")
+	ibcButtonImport:SetWidth(300)
+	ibcButtonImport:SetCallback("OnClick", function()
+		
+		print("Import started...")
+		
+		local newBankingChars = mysplit(ibcMEditboxInput:GetText(), "\r\n")
+		
+		for serverRegion,_ in pairs(novaOptions.Banking[profileSelected]) do
+			for serverName,bankingChar in pairs(novaOptions.Banking[profileSelected][serverRegion]) do
+				
+				for _,newBankingChar in pairs(newBankingChars) do
+
+					local serverNameOldBanking = mysplit(bankingChar[factionSelected], "-")
+					local serverNameNewBanking = mysplit(newBankingChar, "-")
+					
+					if serverNameOldBanking[2]:lower() == serverNameNewBanking[2]:lower() then
+						novaOptions.Banking[profileSelected][serverRegion][serverName][factionSelected] = newBankingChar
+					end
+				
+				end
+				
+			end
+		end
+		
+		print("Import finished...")
+		
+	end)
+	
+	ibcFrame:AddChild(ibcGroupProfile)
+	ibcFrame:AddChild(ibcGroupFaction)
+	ibcFrame:AddChild(ibcGroupInput)
+	ibcFrame:AddChild(ibcButtonImport)
+	
+
+end
+
+
+
 
 -----------------------------------------------------------------------------------------------------
 ---------------------------------------------- EVENTS ----------------------------------------------
@@ -3319,10 +4584,19 @@ function nova:ADDON_LOADED(event, ...)
 			end
 		end
 		
-		novaOptions.General.Version = 5]]
+		]]
+		
+		if novaOptions.General.Version == 5 then
+			novaOptions.Banking = myDefaultOptions.Banking
+		end
+		
+		novaOptions.General.Version = 6
+		
 		------------------
 		--- Set Options
 		------------------
+		
+		
 		if novaOptions.General == nil then
 			novaOptions.General = myDefaultOptions.General 
 		else
@@ -3532,8 +4806,16 @@ function nova:MySlashProcessorFunc(input)	--
 	if historyOpened == false and strlower(input)=="" then
 		ShowHistory()
 	end
+	if strlower(input)=="help" then
+		print("/nb : Opens the NovaBooking History window")
+		print("/nb add : Opens the Add Client window")
+		print("/nb banking : Opens the Import Banking Characters window")
+	end
 	if strlower(input)=="add" then
 		addEditClientToHistory(0)
+	end
+	if strlower(input)=="banking" then
+		importBankingCharacters(0)
 	end
 end
 
